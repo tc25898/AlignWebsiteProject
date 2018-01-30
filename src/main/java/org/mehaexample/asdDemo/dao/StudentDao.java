@@ -67,6 +67,7 @@ public class StudentDao {
 
 		return list;
 	}
+	
 	public int getStudentsCount() {		
 		Connection conn = null;
 		Statement stmt = null;

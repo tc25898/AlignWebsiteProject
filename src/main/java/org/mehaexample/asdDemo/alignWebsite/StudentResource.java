@@ -18,7 +18,7 @@ import org.mehaexample.asdDemo.model.Student;
  * Root resource (exposed at "myresource" path)
  */
 @Path("myresource")
-public class MyResource {
+public class StudentResource {
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent
@@ -31,11 +31,7 @@ public class MyResource {
     public List<Student> getIt() {
     	StudentDao studentDao = new StudentDao();
     	ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
-//    	list = new ArrayList<>();
-//    	Student s = new Student();
-//    	s.setAddress("asd");
-//    	list.add(s);
-    	System.out.println(list.size());
+
         return list;
     }
     
@@ -59,7 +55,6 @@ public class MyResource {
     	String campus = postData.getFirst("campus");
     	String citizenshipStatus = postData.getFirst("citizenshipStatus");
     		
-    	student.setId(1);
     	student.setNUID(nuid);
     	student.setFirstName(firstName);
     	student.setLastName(lastName);
@@ -78,6 +73,7 @@ public class MyResource {
     	StudentDao studentDao = new StudentDao();
     	int countStudents = studentDao.getStudentsCount();
     	student.setId(countStudents + 1);
+    	
     	studentDao.addStudentRecord(student);
     }
 }
