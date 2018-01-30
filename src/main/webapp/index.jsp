@@ -4,7 +4,7 @@
   <title>Form to create a new student record</title>
  </head>
 <body>
-  <form action="../TutorialsDesk.Rest.CRUDWebServices/rest/tasks" method="POST">
+  <form action="webapi/myresource" method="POST">
   <label for="NUID">NUID</label>
   <input name="NUID" />
   <br/>
