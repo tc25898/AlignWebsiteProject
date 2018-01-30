@@ -1,5 +1,8 @@
 package org.mehaexample.asdDemo.alignWebsite;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,9 +27,16 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        return "Got it!";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> getIt() {
+    	StudentDao studentDao = new StudentDao();
+    	ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
+//    	list = new ArrayList<>();
+//    	Student s = new Student();
+//    	s.setAddress("asd");
+//    	list.add(s);
+    	System.out.println(list.size());
+        return list;
     }
     
     @POST
