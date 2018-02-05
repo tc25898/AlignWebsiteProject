@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,6 +18,7 @@ import org.mehaexample.asdDemo.model.Student;
 /**
  * Root resource (exposed at "myresource" path)
  */
+// This is the controller layer
 @Path("myresource")
 public class StudentResource {
 
@@ -39,6 +41,7 @@ public class StudentResource {
 	@Consumes("application/x-www-form-urlencoded")
     public void saveStudentForm(MultivaluedMap<String, String> postData){
     	Student student = new Student();
+    	StudentDao studentDao = new StudentDao();
     	
     	String nuid = postData.getFirst("NUID");
     	String firstName = postData.getFirst("firstName");
@@ -49,7 +52,7 @@ public class StudentResource {
     	String address = postData.getFirst("address");
     	String expectedGraduation = postData.getFirst("expectedGraduation");
     	String startTerm = postData.getFirst("startTerm");
-    	String enrollmentstatus = postData.getFirst("enrollmentstatus");
+    	String enrollmentStatus = postData.getFirst("enrollmentstatus");
     	String major = postData.getFirst("major");
     	String degree = postData.getFirst("degree");
     	String campus = postData.getFirst("campus");
@@ -64,16 +67,22 @@ public class StudentResource {
     	student.setAddress(address);
     	student.setExpectedGraduation(expectedGraduation);
     	student.setStartTerm(startTerm);
-    	student.setEnrollmentstatus(enrollmentstatus);
+    	student.setEnrollmentStatus(enrollmentStatus);
     	student.setMajor(major);
     	student.setDegree(degree);
     	student.setCampus(campus);
-    	student.setCitizenshipStatus(citizenshipStatus);
     	
-    	StudentDao studentDao = new StudentDao();
-    	int countStudents = studentDao.getStudentsCount();
-    	student.setId(countStudents + 1);
-    	
-    	studentDao.addStudentRecord(student);
+    	boolean exists = studentDao.ifNuidExists(nuid);
+    	System.out.println("exists = " + nuid + "," + exists);
+    	if(exists == false){
+        	int countStudents = studentDao.getStudentsCount();
+        	student.setId(countStudents + 1);
+        	studentDao.addStudentRecord(student);
+    	} else{
+       		studentDao.updateStudentRecordDao(student);
+    	}
     }
+    
+  
+    
 }

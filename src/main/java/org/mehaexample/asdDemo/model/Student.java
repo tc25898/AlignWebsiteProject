@@ -7,23 +7,76 @@ public class Student {
 	private int id;
 	private String nuid;
 	private String firstName;
+	private String middleName;
 	private String lastName;
-	private String emailId;
 	private String gender;
+	private int age;
 	private String phoneNumber;
 	private String address;
-	private String expectedGraduation;
-	private String startTerm;
-	private String enrollmentstatus; 
+	private String emailId;
+	private String campus;
 	private String major;
 	private String degree;
-	private String campus;
+	private String entryTerm;
+
+	private String expectedGraduation;
+	private String enrollmentStatus; 
 	private String citizenshipStatus;
+
+	public String getCitizenshipStatus() {
+		return citizenshipStatus;
+	}
+
+	public void setCitizenshipStatus(String citizenshipStatus) {
+		this.citizenshipStatus = citizenshipStatus;
+	}
+
+	private String photo;
 	
 	public Student(){
 		
 	}
 	
+	public String getNuid() {
+		return nuid;
+	}
+
+	public void setNuid(String nuid) {
+		this.nuid = nuid;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getEntryTerm() {
+		return entryTerm;
+	}
+
+	public void setEntryTerm(String entryTerm) {
+		this.entryTerm = entryTerm;
+	}
+
+	public String getEnrollmentStatus() {
+		return enrollmentStatus;
+	}
+
+	public void setEnrollmentStatus(String enrollmentStatus) {
+		this.enrollmentStatus = enrollmentStatus;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -97,20 +150,13 @@ public class Student {
 	}
 	
 	public String getStartTerm() {
-		return startTerm;
+		return entryTerm;
 	}
 	
 	public void setStartTerm(String startTerm) {
-		this.startTerm = startTerm;
+		this.entryTerm = startTerm;
 	}
 	
-	public String getEnrollmentstatus() {
-		return enrollmentstatus;
-	}
-	
-	public void setEnrollmentstatus(String enrollmentstatus) {
-		this.enrollmentstatus = enrollmentstatus;
-	}
 	
 	public String getMajor() {
 		return major;
@@ -136,11 +182,11 @@ public class Student {
 		this.campus = campus;
 	}
 	
-	public String getCitizenshipStatus() {
-		return citizenshipStatus;
+	public String getPhoto() {
+		return photo;
 	}
 	
-	public void setCitizenshipStatus(String citizenshipStatus) {
-		this.citizenshipStatus = citizenshipStatus;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }
