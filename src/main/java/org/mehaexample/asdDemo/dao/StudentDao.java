@@ -23,7 +23,7 @@ public class StudentDao {
 	public StudentDao() {
 		try{
 			//Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 
 			//Open a connection
 			System.out.println("Connecting to database...");
@@ -36,33 +36,35 @@ public class StudentDao {
 	}
 
 	// Create a student record
-	public void addStudentRecord(Student student){
-		String sqlInsertRecord = "INSERT INTO Student " + 
-				"VALUES (" + 
-				"'"+student.getId()+ "'," + 
-				"'"+student.getNUID()+ "'," + 
-				"'"+student.getFirstName()+ "'," + 
-				"'"+student.getLastName()+ "'," + 
-				"'"+student.getEmailId()+ "'," + 
-				"'"+student.getGender()+ "'," + 
-				"'"+student.getPhoneNumber()+ "'," + 
-				"'"+student.getStartTerm()+ "'," + 
-				"'"+student.getEnrollmentStatus()+ "'," + 
-				"'"+student.getMajor()+ "'," + 
-				"'"+student.getDegree()+ "'," + 
-				"'"+student.getCampus()+ "'," +
-				"'"+student.getCitizenshipStatus()+ "'" +
-
-				")";
+	public Student addStudentRecord(Student student){	
 		try{
-			stmt.executeUpdate(sqlInsertRecord);
+			String sqlInsertRecord = "INSERT INTO Student " + 
+					"VALUES (" + 
+					"'"+student.getId()+ "'," + 
+					"'"+student.getNUID()+ "'," + 
+					"'"+student.getFirstName()+ "'," + 
+					"'"+student.getLastName()+ "'," + 
+					"'"+student.getEmailId()+ "'," + 
+					"'"+student.getGender()+ "'," + 
+					"'"+student.getPhoneNumber()+ "'," + 
+					"'"+student.getStartTerm()+ "'," + 
+					"'"+student.getEnrollmentStatus()+ "'," + 
+					"'"+student.getMajor()+ "'," + 
+					"'"+student.getDegree()+ "'," + 
+					"'"+student.getCampus()+ "'," +
+					"'"+student.getCitizenshipStatus()+ "'" +
 
+					")";
+			stmt.executeUpdate(sqlInsertRecord);
 			System.out.println("Created table in given database...");
+			
+			return student;
 		}catch(SQLException se){
 			se.printStackTrace();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	// Read a student record for a given NUID

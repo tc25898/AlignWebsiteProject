@@ -27,6 +27,9 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+
+
 			<dependency>
 				<groupId>org.glassfish.jersey</groupId>
 				<artifactId>jersey-bom</artifactId>
@@ -44,6 +47,12 @@
 			<!-- use the following artifactId if you don't need servlet 2.x compatibility -->
 			<!-- artifactId>jersey-container-servlet</artifactId -->
 		</dependency>
+		
+		<dependency>
+    		<groupId>org.mariadb.jdbc</groupId>
+    		<artifactId>mariadb-java-client</artifactId>
+    		<version>1.1.7</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -57,7 +66,6 @@
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-binding</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

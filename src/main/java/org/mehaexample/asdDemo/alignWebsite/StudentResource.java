@@ -24,6 +24,7 @@ import org.mehaexample.asdDemo.model.Student;
 @Path("myresource")
 public class StudentResource {
 
+	StudentDao studentDao = new StudentDao();
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent
 	 * to the client as "text/plain" media type.
@@ -34,7 +35,6 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudents() {
 		System.out.println("Getting all students");
-		StudentDao studentDao = new StudentDao();
 		ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
 
 		return list;
@@ -45,7 +45,6 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		StudentDao studentDao = new StudentDao();
 		Student studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord; 
 	}
@@ -53,7 +52,6 @@ public class StudentResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
-		StudentDao studentDao = new StudentDao();
 
 		boolean exists = studentDao.ifNuidExists(student.getNUID());
 		if(exists == false){
@@ -70,7 +68,6 @@ public class StudentResource {
     @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
     public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
-		StudentDao studentDao = new StudentDao();
 		
 		boolean exists = studentDao.ifNuidExists(student.getNUID());
 		if(exists == true){
@@ -87,7 +84,6 @@ public class StudentResource {
 	{      
 		System.out.println("delete called ");
 		Student student = new Student();
-		StudentDao studentDao = new StudentDao();
 
 		System.out.println("nuid to be deleted is: " + nuid);
 		boolean exists = studentDao.ifNuidExists(nuid);

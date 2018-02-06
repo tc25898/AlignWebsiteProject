@@ -11,8 +11,27 @@ public class DbHelper {
 	//  Database credentials
 	static final String USER = "root";
 	static final String PASS = "Turkey#786";
+	
+	
+	public static void main(String args[]) {
+		try{
+			//Register JDBC driver
+			Class.forName("org.mariadb.jdbc.Driver");
 
-	public static void main(String[] args) {
+			String DB_URL = "jdbc:mariadb://localhost/STUDENTS2";
+			//Open a connection
+			System.out.println("Connecting to database...");
+			Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/STUDENTS2", USER, PASS);
+//			System.out.println("Connection successful");
+//			stmt = conn.createStatement();
+			System.out.println("success");
+		}catch(Exception ex){
+
+		}
+
+	}
+
+	public static void main2(String[] args) {
 		Connection conn = null;
 		Statement stmt = null;
 		try{
