@@ -100,7 +100,7 @@ public class StudentDao {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			
+
 			return student;	
 		}
 		else{
@@ -108,9 +108,6 @@ public class StudentDao {
 			return null;
 		}
 	}
-
-
-
 
 	public boolean deleteStudentRecord(String nuid){		
 		try{
@@ -174,7 +171,6 @@ public class StudentDao {
 		return list;
 	}
 
-
 	public void updateStudentRecordDao(Student student){
 		try{
 			System.out.println("Updatig Student Record.......");
@@ -193,14 +189,17 @@ public class StudentDao {
 		}
 	}
 
-
-	public int getStudentsCount() {		
+	public int getLastStudentsId() {		
 		try{
-			ResultSet rs = stmt.executeQuery("select count(*) from Student");
-			rs.next();
-			int count = rs.getInt(1);
+			int lastRowId = -1;
+			ResultSet rs = stmt.executeQuery("SELECT * from student ORDER BY ID DESC LIMIT 1");
 
-			return count;
+			while(rs.next()){
+				lastRowId = rs.getInt(1);	
+			}
+			System.out.println("Last row id: " + lastRowId);
+
+			return lastRowId;
 		}catch(SQLException se){
 			se.printStackTrace();
 		}catch(Exception e){
@@ -208,5 +207,4 @@ public class StudentDao {
 		}
 		return -1;
 	}
-
 }
