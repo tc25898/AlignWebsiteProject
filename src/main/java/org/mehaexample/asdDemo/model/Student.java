@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Student {
 	private int id;
 	private String nuid;
+	private String username;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -22,6 +23,15 @@ public class Student {
 	private String expectedGraduation;
 	private String enrollmentStatus; 
 	private String citizenshipStatus;
+	
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public String getCitizenshipStatus() {
 		return citizenshipStatus;

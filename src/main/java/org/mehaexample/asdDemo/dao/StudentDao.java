@@ -42,6 +42,7 @@ public class StudentDao {
 					"VALUES (" + 
 					"'"+student.getId()+ "'," + 
 					"'"+student.getNUID()+ "'," + 
+					"'"+student.getUsername()+ "'," +
 					"'"+student.getFirstName()+ "'," + 
 					"'"+student.getLastName()+ "'," + 
 					"'"+student.getEmailId()+ "'," + 
@@ -52,8 +53,8 @@ public class StudentDao {
 					"'"+student.getMajor()+ "'," + 
 					"'"+student.getDegree()+ "'," + 
 					"'"+student.getCampus()+ "'," +
+					"'"+student.getAddress()+ "'," +
 					"'"+student.getCitizenshipStatus()+ "'" +
-
 					")";
 			stmt.executeUpdate(sqlInsertRecord);
 			System.out.println("Created table in given database...");
