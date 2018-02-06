@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -29,11 +31,22 @@ public class StudentResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> getIt() {
+    public List<Student> getAllStudents() {
+    	System.out.println("Getting all students");
     	StudentDao studentDao = new StudentDao();
     	ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
-
+ 
         return list;
+    }
+    
+    @GET
+    @Path("{nuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Student getStudentRecord(@PathParam("nuid") String nuid){
+    	System.out.println("getting student for nuid = " + nuid);
+    	StudentDao studentDao = new StudentDao();
+    	Student studentRecord = studentDao.getStudentRecord(nuid);
+		return studentRecord; 
     }
     
     @POST
@@ -82,6 +95,21 @@ public class StudentResource {
     	}
     }
     
-  
-    
+    @DELETE
+    @Path("{nuid}")
+    @Produces({ MediaType.APPLICATION_JSON})
+	public void deleteStudentByNUID(@PathParam("nuid") String nuid)
+	{      
+		System.out.println("delete called ");
+		Student student = new Student();
+		StudentDao studentDao = new StudentDao();
+	
+		System.out.println("nuid to be deleted is: " + nuid);
+    	boolean exists = studentDao.ifNuidExists(nuid);
+    	if(exists == true){
+    		studentDao.deleteStudentRecord(nuid);
+    	}else{
+    		System.out.println("This nuid doesn't exist");
+    	}
+	} 
 }

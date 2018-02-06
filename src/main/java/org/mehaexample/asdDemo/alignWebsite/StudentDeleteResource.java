@@ -25,7 +25,7 @@ public class StudentDeleteResource {
     	boolean exists = studentDao.ifNuidExists(nuid);
     	if(exists == true){
     		// passing the student nuid here , not the student itself
-    		studentDao.deleteStudentRecord1(nuid);
+    		studentDao.deleteStudentRecord(nuid);
     	}
 	}
 }
