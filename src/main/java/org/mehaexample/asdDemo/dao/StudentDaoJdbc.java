@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.mehaexample.asdDemo.model.Student;
 
-public class StudentDao {
+public class StudentDaoJdbc {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -20,7 +20,7 @@ public class StudentDao {
 	private final String USER = "root";
 	private final String PASS = "Turkey#786";
 
-	public StudentDao() {
+	public StudentDaoJdbc() {
 		try{
 			//Register JDBC driver
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -41,20 +41,20 @@ public class StudentDao {
 			String sqlInsertRecord = "INSERT INTO Student " + 
 					"VALUES (" + 
 					"'"+student.getId()+ "'," + 
-					"'"+student.getNUID()+ "'," + 
-					"'"+student.getUsername()+ "'," +
+					//"'"+student.getNUID()+ "'," + 
+					//"'"+student.getUsername()+ "'," +
 					"'"+student.getFirstName()+ "'," + 
 					"'"+student.getLastName()+ "'," + 
 					"'"+student.getEmailId()+ "'," + 
 					"'"+student.getGender()+ "'," + 
 					"'"+student.getPhoneNumber()+ "'," + 
-					"'"+student.getStartTerm()+ "'," + 
+					//"'"+student.getStartTerm()+ "'," + 
 					"'"+student.getEnrollmentStatus()+ "'," + 
 					"'"+student.getMajor()+ "'," + 
-					"'"+student.getDegree()+ "'," + 
+					//"'"+student.getDegree()+ "'," + 
 					"'"+student.getCampus()+ "'," +
 					"'"+student.getAddress()+ "'," +
-					"'"+student.getCitizenshipStatus()+ "'" +
+					//"'"+student.getCitizenshipStatus()+ "'" +
 					")";
 			stmt.executeUpdate(sqlInsertRecord);
 			System.out.println("Created table in given database...");
@@ -82,18 +82,69 @@ public class StudentDao {
 				while(rs.next()){
 					//Retrieve by column name
 					student.setId(rs.getInt("id"));
-					student.setNUID(rs.getString("nuid"));
+					student.setNuid(rs.getString("nuid"));
 					student.setFirstName(rs.getString("firstName"));
 					student.setLastName(rs.getString("lastName"));
 					student.setEmailId(rs.getString("emailId"));
 					student.setGender(rs.getString("gender"));
 					student.setPhoneNumber(rs.getString("phoneNumber"));
 					student.setAddress(rs.getString("address"));
-					student.setExpectedGraduation(rs.getString("expectedGraduation"));
-					student.setStartTerm(rs.getString("startTerm"));
+//					student.setExpectedGraduation(rs.getString("expectedGraduation"));
+					// student.setStartTerm(rs.getString("startTerm"));
 					student.setEnrollmentStatus(rs.getString("enrollmentStatus"));
 					student.setMajor(rs.getString("major"));
-					student.setDegree(rs.getString("degree"));
+					// student.setDegree(rs.getString("degree"));
+					student.setCampus(rs.getString("campus"));
+				}
+				rs.close();
+			} 
+			catch(SQLException se){
+				se.printStackTrace();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+			return student;	
+		}
+		else{
+			System.out.println("This nuid does'nt exists");
+			return null;
+		}
+	}
+	
+	public Student getStudentRecord(String nuid, String role){
+		Student student = new Student();
+		if(nuid == null || nuid.isEmpty()){
+			return null;
+		}
+
+		if(ifNuidExists(nuid)){
+			try {
+				String query = "";
+				if(role  == "0") {
+					// more information
+					query = "select age from Student where nuid = '" + nuid + "' ";
+				} else if(role == "1") {
+					// less information
+					query = "select firstname, lastname from Student where nuid = '" + nuid + "' ";
+				}
+				ResultSet rs = stmt.executeQuery("");
+
+				while(rs.next()){
+					//Retrieve by column name
+					student.setId(rs.getInt("id"));
+					student.setNuid(rs.getString("nuid"));
+					student.setFirstName(rs.getString("firstName"));
+					student.setLastName(rs.getString("lastName"));
+					student.setEmailId(rs.getString("emailId"));
+					student.setGender(rs.getString("gender"));
+					student.setPhoneNumber(rs.getString("phoneNumber"));
+					student.setAddress(rs.getString("address"));
+//					student.setExpectedGraduation(rs.getString("expectedGraduation"));
+//					student.setStartTerm(rs.getString("startTerm"));
+					student.setEnrollmentStatus(rs.getString("enrollmentStatus"));
+					student.setMajor(rs.getString("major"));
+//					student.setDegree(rs.getString("degree"));
 					student.setCampus(rs.getString("campus"));
 				}
 				rs.close();

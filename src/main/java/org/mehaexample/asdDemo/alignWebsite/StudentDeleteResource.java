@@ -5,7 +5,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.mehaexample.asdDemo.dao.StudentDao;
+import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
 import org.mehaexample.asdDemo.model.Student;
 
 @Path("deleteresource")
@@ -18,7 +18,7 @@ public class StudentDeleteResource {
 	{      
 		System.out.println("delete called ");
 		Student student = new Student();
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 	
 		String nuid = postData.getFirst("deleteId");
 		System.out.println("nuid dellete" + nuid);

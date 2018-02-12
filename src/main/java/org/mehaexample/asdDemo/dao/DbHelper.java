@@ -6,32 +6,17 @@ import java.sql.*;
 public class DbHelper {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/STUDENTS2";
+	static final String DB_URL = "jdbc:mariadb://localhost:3307";
 
 	//  Database credentials
 	static final String USER = "root";
 	static final String PASS = "Turkey#786";
 	
-	
-	public static void main(String args[]) {
-		try{
-			//Register JDBC driver
-			Class.forName("org.mariadb.jdbc.Driver");
-
-			String DB_URL = "jdbc:mariadb://localhost/STUDENTS2";
-			//Open a connection
-			System.out.println("Connecting to database...");
-			Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/STUDENTS2", USER, PASS);
-//			System.out.println("Connection successful");
-//			stmt = conn.createStatement();
-			System.out.println("success");
-		}catch(Exception ex){
-
-		}
-
+	private void createDB() {
+		
 	}
 
-	public static void main2(String[] args) {
+	public static void main(String[] args) {
 		Connection conn = null;
 		Statement stmt = null;
 		try{
@@ -41,7 +26,7 @@ public class DbHelper {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
+			
 			//STEP 4: Execute a query
 			System.out.println("Creating database...");
 			stmt = conn.createStatement();

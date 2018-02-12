@@ -1,41 +1,31 @@
 package org.mehaexample.asdDemo.alignWebsite;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 
-import org.mehaexample.asdDemo.dao.StudentDao;
+import org.mehaexample.asdDemo.dao.StudentDaoHibernate;
+import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
 import org.mehaexample.asdDemo.model.Student;
 
-/**
- * Root resource (exposed at "myresource" path)
- */
-// This is the controller layer
-@Path("myresource")
+@Path("studentresource")
 public class StudentResource {
+	
 
-	StudentDao studentDao = new StudentDao();
-	/**
-	 * Method handling HTTP GET requests. The returned object will be sent
-	 * to the client as "text/plain" media type.
-	 *
-	 * @return String that will be returned as a text/plain response.
-	 */
+	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudents() {
 		System.out.println("Getting all students");
-		ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
+		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
 
 		return list;
 	}
@@ -45,7 +35,7 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		Student studentRecord = studentDao.getStudentRecord(nuid);
+		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
 		return studentRecord; 
 	}
 
@@ -53,44 +43,12 @@ public class StudentResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
 
-		boolean exists = studentDao.ifNuidExists(student.getNUID());
-		if(exists == false){
-			int lastStudentId = studentDao.getLastStudentsId();
-			student.setId(lastStudentId + 1);
-			studentDao.addStudentRecord(student);	
+		boolean exists = studentDaoHibernate.ifNuidExists(student.getNuid());
+		if(exists == false){			
+			studentDaoHibernate.addStudentRecord(student);	
 		}else{
 			System.out.println("The entered NUID exists already");
 		}
-	}
-
-	@PUT
-	@Path("{nuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
-		
-		boolean exists = studentDao.ifNuidExists(student.getNUID());
-		if(exists == true){
-	        studentDao.updateStudentRecordDao(student);
-		}else{
-			System.out.println("Unable to update, Student doesn't exists");
-		}
-    }
-	
-	@DELETE
-	@Path("{nuid}")
-	@Produces({ MediaType.APPLICATION_JSON})
-	public void deleteStudentByNUID(@PathParam("nuid") String nuid)
-	{      
-		System.out.println("delete called ");
-		Student student = new Student();
-
-		System.out.println("nuid to be deleted is: " + nuid);
-		boolean exists = studentDao.ifNuidExists(nuid);
-		if(exists == true){
-			studentDao.deleteStudentRecord(nuid);
-		}else{
-			System.out.println("This nuid doesn't exist");
-		}
 	} 
+
 }

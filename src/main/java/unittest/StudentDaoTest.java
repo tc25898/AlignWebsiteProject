@@ -1,7 +1,7 @@
 package unittest;
 
 import org.junit.Test;
-import org.mehaexample.asdDemo.dao.StudentDao;
+import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
 import org.mehaexample.asdDemo.model.Student;
 import java.sql.SQLException;
 import junit.framework.Assert;
@@ -11,7 +11,7 @@ public class StudentDaoTest {
 	@Test
 	public void testIfEmptyNuidExists() {
 		System.out.println("hello test");
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 		
 		boolean exists = studentDao.ifNuidExists("");
 		Assert.assertFalse(exists);
@@ -19,7 +19,7 @@ public class StudentDaoTest {
 	
 	@Test
 	public void testIfNullNuidExists() throws SQLException {
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 		
 		boolean exists = studentDao.ifNuidExists(null);
 		Assert.assertFalse(exists);
@@ -27,7 +27,7 @@ public class StudentDaoTest {
 	
 	@Test
 	public void testIfNullStudentCanBeInserted() {
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 		
 		Student studentRecordAdded = studentDao.addStudentRecord(null);
 		Assert.assertNull(studentRecordAdded);
@@ -35,7 +35,7 @@ public class StudentDaoTest {
 	
 	@Test
 	public void testIfNullNuidCanBeDeleted() {
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 		
 		boolean isDeleted = studentDao.deleteStudentRecord(null);
 		Assert.assertFalse(isDeleted);
@@ -43,7 +43,7 @@ public class StudentDaoTest {
 	
 	@Test
 	public void testIfBlankNuidStudentCanBeDeleted() {
-		StudentDao studentDao = new StudentDao();
+		StudentDaoJdbc studentDao = new StudentDaoJdbc();
 		
 		boolean isDeleted = studentDao.deleteStudentRecord("");
 		Assert.assertFalse(isDeleted);
