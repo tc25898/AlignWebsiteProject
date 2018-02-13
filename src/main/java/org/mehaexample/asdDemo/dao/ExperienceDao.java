@@ -3,18 +3,20 @@ package org.mehaexample.asdDemo.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.mehaexample.asdDemo.model.Experience;
 import org.mehaexample.asdDemo.model.PriorEducation;
+import org.mehaexample.asdDemo.model.Student;
 
 public class ExperienceDao {
-	
+
 	private static SessionFactory factory; 
 	private static Session session;
-	
+
 	public ExperienceDao(){
 		try {
 			// it will check the hibernate.cfg.xml file and load it
@@ -26,13 +28,13 @@ public class ExperienceDao {
 			throw new ExceptionInInitializerError(ex); 
 		}
 	}
-	
+
 	public List<Experience> getAllExperiences() {
 		org.hibernate.query.Query query = session.createQuery("from Experience");
 		List<Experience> list = query.list();  
 		return list;
 	}
-	
+
 	public List<Experience> getExperience(String nuid) {
 		org.hibernate.query.Query query = session.createQuery("from Experience where nuid = :studentNuid");
 		System.out.println("nuid here: " + nuid);
@@ -60,4 +62,41 @@ public class ExperienceDao {
 			System.out.println("The student with a given nuid doesn't exists");
 		}
 	}
+
+	public void updateStudentRecordDao(int id, Experience experience) {
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			experience.setId(id);
+			session.update(experience);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		} finally {
+			session.close(); 
+		}
+	}
+
+	public boolean deleteExperienceRecord(int id){		
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			Experience experience = session.get(Experience.class, id); 
+			System.out.println("Deleting student for id = " + id);
+			session.delete(experience); 
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println("exceptionnnnnn");
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		} finally {
+			session.close(); 
+		}
+
+		return true;
+	}
+
 }
