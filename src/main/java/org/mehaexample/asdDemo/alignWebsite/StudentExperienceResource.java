@@ -22,18 +22,28 @@ public class StudentExperienceResource {
 	StudentExperienceDao studentExperienceDao = new StudentExperienceDao();
 
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Experience> getAllExperiences() {
+		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getAllExperiences();
+		return list;
+	}
+	
+	@GET
 	@Path("{nuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Experience> getExperience(@PathParam("nuid") String nuid) {
 		System.out.println("Getting Prior Education Details for student with nuid: " + nuid);
-		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getExperience(nuid);
-		return list;
+//		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getExperience(nuid);
+//		return list;
+		
+		return new ArrayList<>();
 	}
 
 	@POST
 	@Path("{nuid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveExperienceForm(@PathParam("nuid") String nuid, Experience experience){
+		System.out.println("saveExperienceForm - nuid =" + nuid);
 		studentExperienceDao.addExperience(nuid, experience); 
 	} 
 }

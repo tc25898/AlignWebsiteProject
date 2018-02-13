@@ -27,6 +27,12 @@ public class StudentExperienceDao {
 		}
 	}
 	
+	public List<Experience> getAllExperiences() {
+		org.hibernate.query.Query query = session.createQuery("from Experience");
+		List<Experience> list = query.list();  
+		return list;
+	}
+	
 	public List<Experience> getExperience(String nuid) {
 		org.hibernate.query.Query query = session.createQuery("from Experience where nuid = :studentNuid");
 		System.out.println("nuid here: " + nuid);
@@ -35,7 +41,7 @@ public class StudentExperienceDao {
 		return list;
 	}
 
-	public void addExperience(String nuid, Experience  experience) {
+	public void addExperience(String nuid, Experience experience) {
 		Transaction tx = null;
 		StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
 
