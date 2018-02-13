@@ -15,7 +15,7 @@ public class PriorEducationDao {
 
 	private static SessionFactory factory; 
 	private static Session session;
-	
+
 	public PriorEducationDao(){
 		try {
 			// it will check the hibernate.cfg.xml file and load it
@@ -27,7 +27,13 @@ public class PriorEducationDao {
 			throw new ExceptionInInitializerError(ex); 
 		}
 	}
-	
+
+	public ArrayList<PriorEducation> getAllPriorEducations() {
+		org.hibernate.query.Query query = session.createQuery("from PriorEducation");
+		ArrayList<PriorEducation> list = (ArrayList<PriorEducation>) query.list();  
+		return list;
+	}
+
 	public List<PriorEducation> getPriorEducation(String nuid) {
 		org.hibernate.query.Query query = session.createQuery("from PriorEducation where nuid = :studentNuid");
 		System.out.println("nuid here: " + nuid);
@@ -36,7 +42,22 @@ public class PriorEducationDao {
 		return list;
 	}
 
-
+	public void updatePriorEducation(int id, PriorEducation priorEducation) {
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			System.out.println("updating prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionName());
+			priorEducation.setId(id);
+			session.update(priorEducation);
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println("exc................");
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		} finally {
+			session.close(); 
+		}
+	}
 
 	public void addPriorEducation(String nuid, PriorEducation priorEducation) {
 		Transaction tx = null;
@@ -45,6 +66,7 @@ public class PriorEducationDao {
 		if(studentDaoHibernate.ifNuidExists(nuid)){
 			try {
 				tx = session.beginTransaction();
+				System.out.println("savinf prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionName());
 				session.save(priorEducation);
 				tx.commit();
 			} catch (HibernateException e) {

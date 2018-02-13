@@ -3,9 +3,9 @@ package org.mehaexample.asdDemo.model;
 public class PriorEducation {
 	private int id;
 	private String nuid;
-	private String InstitutionName;
-	private String DegreeLevel;
-	private String Major;
+	private String institutionName;
+	private String degreeLevel;
+	private String major;
 	
 	public int getId() {
 		return id;
@@ -24,26 +24,26 @@ public class PriorEducation {
 	}
 	
 	public String getInstitutionName() {
-		return InstitutionName;
+		return institutionName;
 	}
 	
 	public void setInstitutionName(String institutionName) {
-		InstitutionName = institutionName;
+		this.institutionName = institutionName;
 	}
 	
 	public String getDegreeLevel() {
-		return DegreeLevel;
+		return degreeLevel;
 	}
 	
 	public void setDegreeLevel(String degreeLevel) {
-		DegreeLevel = degreeLevel;
+		this.degreeLevel = degreeLevel;
 	}
 	
 	public String getMajor() {
-		return Major;
+		return major;
 	}
 	
 	public void setMajor(String major) {
-		Major = major;
+		this.major = major;
 	}
 }
