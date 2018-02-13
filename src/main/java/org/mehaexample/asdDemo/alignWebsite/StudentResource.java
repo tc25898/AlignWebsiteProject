@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.mehaexample.asdDemo.dao.StudentDaoHibernate;
@@ -21,13 +22,20 @@ import org.mehaexample.asdDemo.model.Student;
 public class StudentResource {
 	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
 	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Student> getAllStudents() {
+//		System.out.println("Getting all students");
+//		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
+//		
+//		return list;
+//	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Student> getAllStudents() {
-		System.out.println("Getting all students");
-		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
-		
-		return list;
+	public Student getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
+		System.out.println("get by email : " + emailId);
+		return new Student(); 
 	}
 
 	@GET
