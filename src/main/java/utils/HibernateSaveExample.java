@@ -1,8 +1,7 @@
-package org.mehaexample.asdDemo.dao;
+package utils;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-import org.mehaexample.asdDemo.model.EmployeeFirst;
 
 public class HibernateSaveExample {
 

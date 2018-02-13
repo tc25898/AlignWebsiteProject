@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.dao;
+package utils;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -11,17 +11,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentExperienceDao;
-import org.mehaexample.asdDemo.dao.StudentPriorEducationDao;
+import org.mehaexample.asdDemo.dao.ExperienceDao;
+import org.mehaexample.asdDemo.dao.PriorEducationDao;
 import org.mehaexample.asdDemo.model.Experience;
 import org.mehaexample.asdDemo.model.PriorEducation;
 
 @Path("studentExperienceResource")
 public class StudentExperienceResource {
 
-	StudentExperienceDao studentExperienceDao = new StudentExperienceDao();
+	ExperienceDao studentExperienceDao = new ExperienceDao();
 
 	@GET
+	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Experience> getAllExperiences() {
 		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getAllExperiences();
@@ -33,10 +34,8 @@ public class StudentExperienceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Experience> getExperience(@PathParam("nuid") String nuid) {
 		System.out.println("Getting Prior Education Details for student with nuid: " + nuid);
-//		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getExperience(nuid);
-//		return list;
-		
-		return new ArrayList<>();
+		ArrayList<Experience> list = (ArrayList<Experience>) studentExperienceDao.getExperience(nuid);
+		return list;
 	}
 
 	@POST

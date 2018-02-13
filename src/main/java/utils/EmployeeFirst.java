@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.model;
+package utils;
 
 import javax.persistence.*;
 

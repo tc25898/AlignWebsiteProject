@@ -1,10 +1,10 @@
 package unittest;
 
 import org.junit.Test;
-import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
 import org.mehaexample.asdDemo.model.Student;
 import java.sql.SQLException;
 import junit.framework.Assert;
+import utils.StudentDaoJdbc;
 
 public class StudentDaoTest {
 	

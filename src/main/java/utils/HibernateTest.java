@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.dao;
+package utils;
 
 import java.util.List; 
 import java.util.Date;
@@ -9,38 +9,39 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.mehaexample.asdDemo.model.Employee;
+import org.mehaexample.asdDemo.model.Student;
 
-public class ManageEmployee {
+public class HibernateTest {
 	private static SessionFactory factory; 
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 		try {
+			// it will check the hibernate.cfg.xml file and load it
+			// next it goes to all table files in the hibernate file and loads them
 			factory = new Configuration().configure().buildSessionFactory();
+			addStudentRecord("fn", "lname", "7624");
 		} catch (Throwable ex) { 
 			System.err.println("Failed to create sessionFactory object." + ex);
 			throw new ExceptionInInitializerError(ex); 
 		}
-
-		ManageEmployee ME = new ManageEmployee();
-
-		System.out.println("=============================================");
-		/* Add few employee records in database */
-		Integer empID1 = ME.addEmployee("Zara", "Ali", 1000);
-		Integer empID2 = ME.addEmployee("Daisy", "Das", 5000);
-		Integer empID3 = ME.addEmployee("John", "Paul", 10000);
 	}
 
 	/* Method to CREATE an employee in the database */
-	public Integer addEmployee(String fname, String lname, int salary){
+	public static void addStudentRecord(String fname, String lname, String nuid){
 		Session session = factory.openSession();
 		Transaction tx = null;
-		Integer employeeID = null;
 
 		try {
 			tx = session.beginTransaction();
-			Employee employee = new Employee(fname, lname, salary);
-			employeeID = (Integer) session.save(employee); 
+			
+			Student student = new Student();
+			student.setFirstName(fname);
+			student.setEmailId("foo@bar.com");
+			student.setLastName(lname);
+			student.setNuid(nuid);
+			
+//		 adding a record using hibaernamtw
+			session.save(student);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
@@ -48,6 +49,5 @@ public class ManageEmployee {
 		} finally {
 			session.close(); 
 		}
-		return employeeID;
 	}
 }

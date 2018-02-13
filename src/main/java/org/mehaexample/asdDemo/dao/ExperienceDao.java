@@ -1,6 +1,5 @@
 package org.mehaexample.asdDemo.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -8,15 +7,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.mehaexample.asdDemo.model.Experience;
 import org.mehaexample.asdDemo.model.PriorEducation;
-import org.mehaexample.asdDemo.model.Student;
 
-public class StudentPriorEducationDao {
-
+public class ExperienceDao {
+	
 	private static SessionFactory factory; 
 	private static Session session;
 	
-	public StudentPriorEducationDao(){
+	public ExperienceDao(){
 		try {
 			// it will check the hibernate.cfg.xml file and load it
 			// next it goes to all table files in the hibernate file and loads them
@@ -28,27 +27,30 @@ public class StudentPriorEducationDao {
 		}
 	}
 	
-	public List<PriorEducation> getPriorEducation(String nuid) {
-		org.hibernate.query.Query query = session.createQuery("from PriorEducation where nuid = :studentNuid");
+	public List<Experience> getAllExperiences() {
+		org.hibernate.query.Query query = session.createQuery("from Experience");
+		List<Experience> list = query.list();  
+		return list;
+	}
+	
+	public List<Experience> getExperience(String nuid) {
+		org.hibernate.query.Query query = session.createQuery("from Experience where nuid = :studentNuid");
 		System.out.println("nuid here: " + nuid);
 		query.setParameter("studentNuid", nuid);
-		List<PriorEducation> list = query.list();  
+		List<Experience> list = query.list();  
 		return list;
 	}
 
-
-
-	public void addPriorEducation(String nuid, PriorEducation priorEducation) {
+	public void addExperience(String nuid, Experience experience) {
 		Transaction tx = null;
-		StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
-		System.out.println(priorEducation.getDegreeLevel());
+		StudentDao studentDaoHibernate = new StudentDao();
+
 		if(studentDaoHibernate.ifNuidExists(nuid)){
 			try {
 				tx = session.beginTransaction();
-				session.save(priorEducation);
+				session.save(experience);
 				tx.commit();
 			} catch (HibernateException e) {
-				System.out.println("exc................");
 				if (tx!=null) tx.rollback();
 				e.printStackTrace(); 
 			} finally {
@@ -58,5 +60,4 @@ public class StudentPriorEducationDao {
 			System.out.println("The student with a given nuid doesn't exists");
 		}
 	}
-
 }

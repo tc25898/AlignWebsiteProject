@@ -14,13 +14,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentDaoHibernate;
-import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
+import org.mehaexample.asdDemo.dao.StudentDao;
 import org.mehaexample.asdDemo.model.Student;
+
+import utils.StudentDaoJdbc;
 
 @Path("studentresource")
 public class StudentResource {
-	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
+	StudentDao studentDaoHibernate = new StudentDao();
+	
+	/**
+	 * Method handling HTTP GET requests. The returned object will be sent
+	 * to the client as "text/plain" media type.
+	 *
+	 * @return String that will be returned as a text/plain response.
+	 */
 	
 	@GET
 	@Path("/all")
@@ -32,6 +40,8 @@ public class StudentResource {
 		return list;
 	}
 	
+	// Template method for fetching a student record by nuid
+	// http://localhost:8080/alignWebsite/webapi/studentresource?emailId=ashley.fields@husky.neu.edu
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
@@ -39,13 +49,15 @@ public class StudentResource {
 		return new Student(); 
 	}
 
+	// Template method for fetching a student record by email
+	// http://localhost:8080/alignWebsite/webapi/studentresource/123
 	@GET
 	@Path("{nuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
 		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
-		return studentRecord; 
+		return studentRecord;
 	}
 
 	@POST
@@ -59,8 +71,9 @@ public class StudentResource {
 		}else{
 			System.out.println("The entered NUID exists already");
 		}
-	} 
+	}
 	
+	// Template method for updating a student record by nuid
 	@PUT
 	@Path("/{nuid}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -68,6 +81,15 @@ public class StudentResource {
     public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
 		System.out.println("update record nuid=" + nuid);
 		studentDaoHibernate.updateStudentRecordDao(nuid, student);
+    }
+
+	// Template method for updating a student record by email
+	@PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+    public void updateStudentRecordByEmail(@QueryParam("emailId") String emailId , Student student) {
+		System.out.println("update record nuid=" + emailId);
+		studentDaoHibernate.updateStudentRecordDaoByEmail(emailId, student);
     }
 	
 	@DELETE

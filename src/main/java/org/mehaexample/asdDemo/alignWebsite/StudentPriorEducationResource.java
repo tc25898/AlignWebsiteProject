@@ -11,14 +11,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentPriorEducationDao;
+import org.mehaexample.asdDemo.dao.PriorEducationDao;
 import org.mehaexample.asdDemo.model.PriorEducation;
 import org.mehaexample.asdDemo.model.Student;
 
 @Path("studentPriorEducationResource")
 public class StudentPriorEducationResource {
 	
-	StudentPriorEducationDao studentPriorEducationDao = new StudentPriorEducationDao();
+	PriorEducationDao studentPriorEducationDao = new PriorEducationDao();
 	
 	@GET
 	@Path("{nuid}")

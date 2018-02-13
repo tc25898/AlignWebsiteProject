@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.dao;
+package utils;
 
 //STEP 1. Import required packages
 import java.sql.*;

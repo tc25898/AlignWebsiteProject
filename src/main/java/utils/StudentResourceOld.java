@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.alignWebsite;
+package utils;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.mehaexample.asdDemo.dao.StudentDaoJdbc;
 import org.mehaexample.asdDemo.model.Student;
 
 /**

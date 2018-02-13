@@ -1,4 +1,4 @@
-package org.mehaexample.asdDemo.model;
+package utils;
 public class Employee {
 	private int id;
 	private String firstName; 
