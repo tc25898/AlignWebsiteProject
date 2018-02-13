@@ -51,6 +51,23 @@ public class StudentDao {
 			}
 		}
 	}
+	
+	// added search student record using first name
+	public List<Student> searchStudentRecord(String firstName) {
+		org.hibernate.query.Query query = session.createQuery("from Student where firstName = :studentfirstName ");
+		query.setParameter("studentfirstName", firstName);
+		List<Student> list = query.list();
+		return list;
+	}
+	
+	// added search student record using first name
+	public List<Student> searchSimilarStudents(String degree, String major) {
+		org.hibernate.query.Query query = session.createQuery("from Student where degreeCandidacy = :degree and major = :major ");
+		query.setParameter("degree", degree);
+		query.setParameter("major", major);
+		List<Student> list = query.list();
+		return list;
+	}
 
 	public List<Student> getAllStudents(){
 		org.hibernate.query.Query query = session.createQuery("from Student");

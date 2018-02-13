@@ -92,6 +92,15 @@ public class StudentResource {
 		studentDaoHibernate.updateStudentRecordDaoByEmail(emailId, student);
     }
 	
+	// student opt-in/opt-out
+	@PUT
+	@Path("/opt-in/{nuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+    public void updateStudentOptIn(@PathParam("nuid") String nuid , Student student) {
+		System.out.println("update opt-in field for nuid=" + nuid);
+    }	
+	
 	@DELETE
 	@Path("{nuid}")
 	@Produces({ MediaType.APPLICATION_JSON})
