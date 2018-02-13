@@ -13,14 +13,14 @@ public class Student {
 	private String middleName;
 	private String lastName;
 	private String gender;
-	private boolean scholarship;
+	//private boolean scholarship;
 	private int age;
 	private String phoneNumber;
 	private String address;
 	private String campus;
 	private String major;
-	private degree degreeCandidacy;
 	private String enrollmentStatus; 
+	
 	private String photo;
 	
 	public int getId() {
@@ -73,12 +73,12 @@ public class Student {
 		this.gender = gender;
 	}
 	
-	public boolean isScholarship() {
-		return scholarship;
-	}
-	public void setScholarship(boolean scholarship) {
-		this.scholarship = scholarship;
-	}
+//	public boolean isScholarship() {
+//		return scholarship;
+//	}
+//	public void setScholarship(boolean scholarship) {
+//		this.scholarship = scholarship;
+//	}
 	
 	public int getAge() {
 		return age;
@@ -115,12 +115,12 @@ public class Student {
 		this.major = major;
 	}
 	
-	public degree getDegreeCandidacy() {
-		return degreeCandidacy;
-	}
-	public void setDegreeCandidacy(degree degreeCandidacy) {
-		this.degreeCandidacy = degreeCandidacy;
-	}
+//	public Degree getDegreeCandidacy() {
+//		return degreeCandidacy;
+//	}
+//	public void setDegreeCandidacy(Degree degreeCandidacy) {
+//		this.degreeCandidacy = degreeCandidacy;
+//	}
 	
 	public String getEnrollmentStatus() {
 		return enrollmentStatus;

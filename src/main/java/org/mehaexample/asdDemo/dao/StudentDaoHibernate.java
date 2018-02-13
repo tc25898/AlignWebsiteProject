@@ -38,13 +38,14 @@ public class StudentDaoHibernate {
 		if(ifNuidExists(student.getNuid())){
 			System.out.println("student already exists!");
 		}else{
+			System.out.println("saving student in addStudentRecord");
 			try {
 				tx = session.beginTransaction();
 				session.save(student);
 				tx.commit();
 			} catch (HibernateException e) {
+				System.out.println("HibernateException: " + e);
 				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
 			} finally {
 				session.close(); 
 			}

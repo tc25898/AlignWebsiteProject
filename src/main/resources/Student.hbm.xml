@@ -20,7 +20,6 @@
       <property name = "middleName" column = "middle_Name" type = "string"/>
       <property name = "lastName" column = "last_name" type = "string"/>
       <property name = "gender" column = "gender" type = "string"/>
-      <property name = "age" column = "scholarship" type = "int"/>
       <property name = "phoneNumber" column = "phoneNumber" type = "string"/>
       <property name = "address" column = "address" type = "string"/>
       <property name = "campus" column = "campus" type = "string"/>

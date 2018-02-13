@@ -1,10 +1,19 @@
 package org.mehaexample.asdDemo.model;
 
 public class PriorEducation {
+	private int id;
 	private String nuid;
 	private String InstitutionName;
 	private String DegreeLevel;
 	private String Major;
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	} 
 	
 	public String getNuid() {
 		return nuid;

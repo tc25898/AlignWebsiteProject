@@ -19,8 +19,6 @@ import org.mehaexample.asdDemo.model.Student;
 
 @Path("studentresource")
 public class StudentResource {
-	
-
 	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
 	
 	@GET
@@ -28,7 +26,7 @@ public class StudentResource {
 	public List<Student> getAllStudents() {
 		System.out.println("Getting all students");
 		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
-
+		
 		return list;
 	}
 
@@ -44,8 +42,9 @@ public class StudentResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
-
+		System.out.println("saving student " + student.getFirstName() + ", " + student.getNuid());
 		boolean exists = studentDaoHibernate.ifNuidExists(student.getNuid());
+		System.out.println("student exists = " + exists);
 		if(exists == false){			
 			studentDaoHibernate.addStudentRecord(student);	
 		}else{
