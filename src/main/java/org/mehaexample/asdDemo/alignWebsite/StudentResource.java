@@ -22,14 +22,15 @@ import org.mehaexample.asdDemo.model.Student;
 public class StudentResource {
 	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Student> getAllStudents() {
-//		System.out.println("Getting all students");
-//		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
-//		
-//		return list;
-//	}
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Student> getAllStudents() {
+		System.out.println("Getting all students");
+		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
+		
+		return list;
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
