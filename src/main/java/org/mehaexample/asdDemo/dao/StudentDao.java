@@ -35,7 +35,7 @@ public class StudentDao {
 	public void addStudentRecord(Student student) {		
 		Transaction tx = null;
 
-		if(ifNuidExists(student.getNeuid())){
+		if(ifNuidExists(student.getNeuId())){
 			System.out.println("student already exists!");
 		}else{
 			System.out.println("saving student in addStudentRecord");

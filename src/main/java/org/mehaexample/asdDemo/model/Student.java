@@ -10,9 +10,8 @@ import org.mehaexample.asdDemo.enums.Gender;
 @XmlRootElement
 
 public class Student {
-	
 	private int id;
-	private String neuid;
+	private String neuId;
 	private String email;
 	private String firstName;
 	private String middleName;
@@ -38,12 +37,12 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getNeuid() {
-		return neuid;
+	public String getNeuId() {
+		return neuId;
 	}
 
-	public void setNeuid(String neuid) {
-		this.neuid = neuid;
+	public void setNeuId(String neuId) {
+		this.neuId = neuId;
 	}
 
 	public String getEmail() {

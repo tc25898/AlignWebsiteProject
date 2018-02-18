@@ -30,6 +30,7 @@
       <mapping resource = "Student.hbm.xml"/>
       <mapping resource = "PriorEducation.hbm.xml"/>
       <mapping resource = "Experience.hbm.xml"/>
-      
+      <mapping resource = "Elective.hbm.xml"/>
+      <mapping resource = "Courses.hbm.xml"/>
    </session-factory>
 </hibernate-configuration>

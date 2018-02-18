@@ -4,10 +4,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "org.mehaexample.asdDemo.model.Experience" table = "experience">
+   <class name = "org.mehaexample.asdDemo.model.Elective" table = "Elective">
       
       <meta attribute = "class-description">
-         This class contains the Student's Experience details. 
+         This class contains the Course details. 
       </meta>
       
       <id name = "id" type = "int" column = "id">
@@ -15,8 +15,8 @@
       </id>
       
       <property name = "nueId" column = "NeuId" type = "string"/>    
-      <property name = "title" column = "title" type = "string"/>
-      <property name = "description" column = "description" type = "string"/>
+      <property name = "title" column = "Title" type = "string"/>
+      <property name = "description" column = "Description" type = "string"/>
       
    </class>
 </hibernate-mapping>
