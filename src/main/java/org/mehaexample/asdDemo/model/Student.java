@@ -2,136 +2,174 @@ package org.mehaexample.asdDemo.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.mehaexample.asdDemo.enums.Campus;
+import org.mehaexample.asdDemo.enums.DegreeCandidacy;
+import org.mehaexample.asdDemo.enums.EnrollmentStatus;
+import org.mehaexample.asdDemo.enums.Gender;
+
 @XmlRootElement
 
 public class Student {
 	
 	private int id;
-	private String nuid;
-	private String emailId;
+	private String neuid;
+	private String email;
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private String gender;
-	//private boolean scholarship;
+	private Gender gender;
+	private boolean scholarship;
+	private boolean f1Visa;
 	private int age;
-	private String phoneNumber;
+	private String phone;
 	private String address;
-	private String campus;
-	private String major;
-	private String enrollmentStatus; 
-	
+	private String State;
+	private String zip;
+	private EnrollmentStatus enrollmentStatus; 
+	private Campus campus;
+	private DegreeCandidacy degreeCandidacy;
 	private String photo;
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getNuid() {
-		return nuid;
+
+	public String getNeuid() {
+		return neuid;
 	}
-	public void setNuid(String nuid) {
-		this.nuid = nuid;
+
+	public void setNeuid(String neuid) {
+		this.neuid = neuid;
 	}
-	
-	public String getEmailId() {
-		return emailId;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public String getMiddleName() {
 		return middleName;
 	}
+
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	public String getGender() {
+
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-	
-//	public boolean isScholarship() {
-//		return scholarship;
-//	}
-//	public void setScholarship(boolean scholarship) {
-//		this.scholarship = scholarship;
-//	}
-	
+
+	public boolean isScholarship() {
+		return scholarship;
+	}
+
+	public void setScholarship(boolean scholarship) {
+		this.scholarship = scholarship;
+	}
+
+	public boolean isF1Visa() {
+		return f1Visa;
+	}
+
+	public void setF1Visa(boolean f1Visa) {
+		this.f1Visa = f1Visa;
+	}
+
 	public int getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	public String getPhoneNumber() {
-		return phoneNumber;
+
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	public String getCampus() {
-		return campus;
+
+	public String getState() {
+		return State;
 	}
-	public void setCampus(String campus) {
-		this.campus = campus;
+
+	public void setState(String state) {
+		State = state;
 	}
-	
-	public String getMajor() {
-		return major;
+
+	public String getZip() {
+		return zip;
 	}
-	public void setMajor(String major) {
-		this.major = major;
+
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
-	
-//	public Degree getDegreeCandidacy() {
-//		return degreeCandidacy;
-//	}
-//	public void setDegreeCandidacy(Degree degreeCandidacy) {
-//		this.degreeCandidacy = degreeCandidacy;
-//	}
-	
-	public String getEnrollmentStatus() {
+
+	public EnrollmentStatus getEnrollmentStatus() {
 		return enrollmentStatus;
 	}
-	public void setEnrollmentStatus(String enrollmentStatus) {
+
+	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
 		this.enrollmentStatus = enrollmentStatus;
 	}
-	
+
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
+
+	public DegreeCandidacy getDegreeCandidacy() {
+		return degreeCandidacy;
+	}
+
+	public void setDegreeCandidacy(DegreeCandidacy degreeCandidacy) {
+		this.degreeCandidacy = degreeCandidacy;
+	}
+
 	public String getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}

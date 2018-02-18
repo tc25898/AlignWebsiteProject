@@ -63,8 +63,8 @@ public class StudentResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
-		System.out.println("saving student " + student.getFirstName() + ", " + student.getNuid());
-		boolean exists = studentDaoHibernate.ifNuidExists(student.getNuid());
+		System.out.println("saving student " + student.getFirstName() + ", " + student.getNeuid());
+		boolean exists = studentDaoHibernate.ifNuidExists(student.getNeuid());
 		System.out.println("student exists = " + exists);
 		if(exists == false){			
 			studentDaoHibernate.addStudentRecord(student);	
