@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentDaoHibernate;
+import org.mehaexample.asdDemo.dao.StudentDao;
 import org.mehaexample.asdDemo.model.Student;
 
 @Path("admin")
@@ -17,14 +17,14 @@ public class Admin{
 	
 	// student details methods
 	
-	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
+	StudentDao studentDao = new StudentDao();
 	
 	@GET
 	@Path("search/{firstName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> searchStudent(@PathParam("firstName") String firstName){
 		System.out.println("getting search results for firstName = " + firstName);
-		ArrayList<Student> studentRecords = (ArrayList<Student>) studentDaoHibernate.searchStudentRecord(firstName);
+		ArrayList<Student> studentRecords = (ArrayList<Student>) studentDao.searchStudentRecord(firstName);
 		return studentRecords; 
 	}
 	
@@ -33,7 +33,7 @@ public class Admin{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentProfile(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
+		Student studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord; 
 	}
 	
