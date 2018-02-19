@@ -46,7 +46,7 @@ public class PriorEducationDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			System.out.println("updating prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionName());
+			System.out.println("updating prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionId());
 			priorEducation.setId(id);
 			session.update(priorEducation);
 			tx.commit();
@@ -66,7 +66,7 @@ public class PriorEducationDao {
 		if(studentDaoHibernate.ifNuidExists(nuid)){
 			try {
 				tx = session.beginTransaction();
-				System.out.println("savinf prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionName());
+				System.out.println("savinf prioredu " + priorEducation.getDegreeLevel() + ", " + priorEducation.getInstitutionId());
 				session.save(priorEducation);
 				tx.commit();
 			} catch (HibernateException e) {

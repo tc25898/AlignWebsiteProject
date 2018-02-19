@@ -81,8 +81,8 @@ public class Student {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setGender(String gender) {
+		this.gender = Gender.valueOf(gender);
 	}
 
 	public boolean isScholarship() {
@@ -145,24 +145,24 @@ public class Student {
 		return enrollmentStatus;
 	}
 
-	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
-		this.enrollmentStatus = enrollmentStatus;
+	public void setEnrollmentStatus(String enrollmentStatus) {
+		this.enrollmentStatus = EnrollmentStatus.valueOf(enrollmentStatus);
 	}
 
 	public Campus getCampus() {
 		return campus;
 	}
 
-	public void setCampus(Campus campus) {
-		this.campus = campus;
+	public void setCampus(String campus) {
+		this.campus = Campus.valueOf(campus);
 	}
 
 	public DegreeCandidacy getDegreeCandidacy() {
 		return degreeCandidacy;
 	}
 
-	public void setDegreeCandidacy(DegreeCandidacy degreeCandidacy) {
-		this.degreeCandidacy = degreeCandidacy;
+	public void setDegreeCandidacy(String degreeCandidacy) {
+		this.degreeCandidacy = DegreeCandidacy.valueOf(degreeCandidacy);
 	}
 
 	public String getPhoto() {

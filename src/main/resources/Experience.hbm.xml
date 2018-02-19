@@ -10,7 +10,7 @@
          This class contains the Student's Experience details. 
       </meta>
       
-      <id name = "id" type = "int" column = "id">
+      <id name = "id" type = "int" column = "ExperienceId">
          <generator class="native"/>
       </id>
       

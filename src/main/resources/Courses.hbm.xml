@@ -10,11 +10,10 @@
          This class contains the Course details. 
       </meta>
       
-      <id name = "id" type = "int" column = "id">
+      <id name = "id" type = "int" column = "CourseId">
          <generator class="native"/>
       </id>
    
-      <property name = "nueId" column = "NeuId" type = "string"/>    
       <property name = "courseName" column = "CourseName" type = "string"/>
       <property name = "description" column = "Description" type = "string"/>
       

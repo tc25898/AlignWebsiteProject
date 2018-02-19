@@ -21,7 +21,7 @@ import utils.StudentDaoJdbc;
 
 @Path("studentresource")
 public class StudentResource {
-	StudentDao studentDaoHibernate = new StudentDao();
+	StudentDao studentDao = new StudentDao();
 	
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent
@@ -35,7 +35,7 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudents() {
 		System.out.println("Getting all students");
-		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
+		ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
 		
 		return list;
 	}
@@ -56,7 +56,7 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
+		Student studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord;
 	}
 
@@ -64,10 +64,10 @@ public class StudentResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
 		System.out.println("saving student " + student.getFirstName() + ", " + student.getNeuId());
-		boolean exists = studentDaoHibernate.ifNuidExists(student.getNeuId());
+		boolean exists = studentDao.ifNuidExists(student.getNeuId());
 		System.out.println("student exists = " + exists);
 		if(exists == false){			
-			studentDaoHibernate.addStudentRecord(student);	
+			studentDao.addStudentRecord(student);	
 		}else{
 			System.out.println("The entered NUID exists already");
 		}
@@ -80,7 +80,7 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
     public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
 		System.out.println("update record nuid=" + nuid);
-		studentDaoHibernate.updateStudentRecordDao(nuid, student);
+		studentDao.updateStudentRecordDao(nuid, student);
     }
 
 	// Template method for updating a student record by email
@@ -89,7 +89,7 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
     public void updateStudentRecordByEmail(@QueryParam("emailId") String emailId , Student student) {
 		System.out.println("update record nuid=" + emailId);
-		studentDaoHibernate.updateStudentRecordDaoByEmail(emailId, student);
+		studentDao.updateStudentRecordDaoByEmail(emailId, student);
     }
 	
 	// student opt-in/opt-out
@@ -110,10 +110,10 @@ public class StudentResource {
 		Student student = new Student();
 
 		System.out.println("nuid to be deleted is: " + nuid);
-		boolean exists = studentDaoHibernate.ifNuidExists(nuid);
+		boolean exists = studentDao.ifNuidExists(nuid);
 		System.out.println("exists = " + exists);
 		if(exists == true){
-			studentDaoHibernate.deleteStudentRecord(nuid);
+			studentDao.deleteStudentRecord(nuid);
 		}else{
 			System.out.println("This nuid doesn't exist");
 		}
