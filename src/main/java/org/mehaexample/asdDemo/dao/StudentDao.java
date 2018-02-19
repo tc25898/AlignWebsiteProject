@@ -76,7 +76,7 @@ public class StudentDao {
 	}
 
 	public Student getStudentRecord(String nuid) {
-		org.hibernate.query.Query query = session.createQuery("from Student where nuid = :studentNuid ");
+		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid ");
 		query.setParameter("studentNuid", nuid);
 		List list = query.list();
 		if(list.size()==1){
