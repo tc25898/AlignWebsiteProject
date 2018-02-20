@@ -6,11 +6,11 @@ import java.sql.*;
 public class DbHelper {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mariadb://localhost:3307";
+	static final String DB_URL = "jdbc:mariadb://127.0.0.1:3305/alignprivate";
 
 	//  Database credentials
 	static final String USER = "root";
-	static final String PASS = "Turkey#786";
+	static final String PASS = "root";
 	
 	private void createDB() {
 		
@@ -29,27 +29,27 @@ public class DbHelper {
 			
 			//STEP 4: Execute a query
 			System.out.println("Creating database...");
-			stmt = conn.createStatement();
-
-			//    String sql = "CREATE DATABASE STUDENTS2";
-			//    stmt.executeUpdate(sql);
-			//    System.out.println("Database created successfully...");
-
-			String sqlTable = "CREATE TABLE Student " +
-					"(id INTEGER not NULL, " +
-					" nuid VARCHAR(255), " + 
-					" firstName VARCHAR(255), " + 
-					" lastName VARCHAR(255), " + 
-					" emailId VARCHAR(255), " + 
-					" gender VARCHAR(255), " + 
-					" phoneNumber VARCHAR(255), " + 
-					" startTerm VARCHAR(255), " + 
-					" enrollmentstatus VARCHAR(255), " + 
-					" major VARCHAR(255), " + 
-					" degree VARCHAR(255), " + 
-					" campus VARCHAR(255), " + 
-					" citizenshipStatus VARCHAR(255), " + 
-					" PRIMARY KEY ( id ))"; 
+//			stmt = conn.createStatement();
+//
+//			//    String sql = "CREATE DATABASE STUDENTS2";
+//			//    stmt.executeUpdate(sql);
+//			//    System.out.println("Database created successfully...");
+//
+//			String sqlTable = "CREATE TABLE Student " +
+//					"(id INTEGER not NULL, " +
+//					" nuid VARCHAR(255), " + 
+//					" firstName VARCHAR(255), " + 
+//					" lastName VARCHAR(255), " + 
+//					" emailId VARCHAR(255), " + 
+//					" gender VARCHAR(255), " + 
+//					" phoneNumber VARCHAR(255), " + 
+//					" startTerm VARCHAR(255), " + 
+//					" enrollmentstatus VARCHAR(255), " + 
+//					" major VARCHAR(255), " + 
+//					" degree VARCHAR(255), " + 
+//					" campus VARCHAR(255), " + 
+//					" citizenshipStatus VARCHAR(255), " + 
+//					" PRIMARY KEY ( id ))"; 
 
 			// stmt.executeUpdate(sqlTable);
 			System.out.println("Created table in given database...");
