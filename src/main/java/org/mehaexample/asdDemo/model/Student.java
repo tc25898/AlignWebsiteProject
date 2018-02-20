@@ -21,7 +21,7 @@ public class Student {
 	private int age;
 	private String phone;
 	private String address;
-	private String State;
+	private String state;
 	private String zip;
 	private EnrollmentStatus enrollmentStatus;
 	private Campus campus;
@@ -125,11 +125,11 @@ public class Student {
 	}
 
 	public String getState() {
-		return State;
+		return state;
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 
 	public String getZip() {
@@ -142,7 +142,7 @@ public class Student {
 
 	public EnrollmentStatus getEnrollmentStatus() {
 		return enrollmentStatus;
-	} 
+	}
 
 	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
 		this.enrollmentStatus = enrollmentStatus;

@@ -37,7 +37,7 @@ public class StudentDao {
 		List<Student> list = query.list();
 		return list;
 	}
-	
+
 	public Student getStudentRecord(String nuid) {
 		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid");
 		query.setParameter("studentNuid", nuid);
@@ -49,7 +49,7 @@ public class StudentDao {
 			return null;
 		}
 	}
-	
+
 	public Student getStudentRecordByEmailId(String email) {
 		org.hibernate.query.Query query = session.createQuery("from Student where Email = :studentEmail");
 		query.setParameter("studentEmail", email);
@@ -64,24 +64,21 @@ public class StudentDao {
 
 	public void addStudentRecord(Student student) {		
 		Transaction tx = null;
-
-		if(ifNuidExists(student.getNeuId())){
-			System.out.println("student already exists!");
-		}else{
-			System.out.println("saving student in addStudentRecord");
-			try {
-				tx = session.beginTransaction();
-				session.save(student);
-				tx.commit();
-			} catch (HibernateException e) {
-				System.out.println("HibernateException: " + e);
-				if (tx!=null) tx.rollback();
-			} finally {
-				session.close(); 
-			}
+		System.out.println("saving student in addStudentRecord");
+		try {
+			tx = session.beginTransaction();
+			System.out.println("State is ====== " + student.getState());
+			session.save(student);
+			tx.commit();
+		} catch (HibernateException e) {
+			System.out.println("HibernateException: " + e);
+			if (tx!=null) tx.rollback();
+		} finally {
+			session.close(); 
 		}
+
 	}
-	
+
 	// added search student record using first name
 	public List<Student> searchStudentRecord(String firstName) {
 		org.hibernate.query.Query query = session.createQuery("from Student where firstName = :studentfirstName ");
@@ -89,7 +86,7 @@ public class StudentDao {
 		List<Student> list = query.list();
 		return list;
 	}
-	
+
 	// added search student record using first name
 	public List<Student> searchSimilarStudents(String degree, String major) {
 		org.hibernate.query.Query query = session.createQuery("from Student where degreeCandidacy = :degree and major = :major ");
@@ -99,18 +96,18 @@ public class StudentDao {
 		return list;
 	}
 
-	
 
-	
+
+
 	public void updateStudentRecordDaoByEmail(String email, Student student) {
 		Transaction tx = null;
 		String nuid = getNuidForEmail(email);
 		if(ifNuidExists(nuid)){
 			try{
-				
+
 				Session session = factory.openSession();
 				tx = session.beginTransaction();
-				
+
 				String hql = "UPDATE Student set address = :studentAddress "  + 
 						"WHERE nuid = :studentNuid";
 				org.hibernate.query.Query query = session.createQuery(hql);
@@ -119,35 +116,35 @@ public class StudentDao {
 				int result = query.executeUpdate();
 				System.out.println("Rows affected: " + result);
 				tx.commit();
-//				Session session = factory.openSession();
-//				tx = session.beginTransaction();
-//
-//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
-//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-//				int updatedEntities = session.createQuery( hqlUpdate )
-//				        .setString( "newAddress", student.getAddress())
-//				        .setString( "studentNuid", nuid )
-//				        .executeUpdate();
-//				tx.commit();
-//				session.close();
-//				tx = session.beginTransaction();
-//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
-//						" where nuid = :studentNuid");
-//				query.setParameter("studentAddress", student.getAddress());
-//				query.setParameter("studentNuid", nuid);
-//				
-//				int result = query.executeUpdate();
-////				session.save(student);
-//				tx.commit();
-//				System.out.println("update = " + result);
-//				//session.save(student);
-				
+				//				Session session = factory.openSession();
+				//				tx = session.beginTransaction();
+				//
+				//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
+				//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
+				//				int updatedEntities = session.createQuery( hqlUpdate )
+				//				        .setString( "newAddress", student.getAddress())
+				//				        .setString( "studentNuid", nuid )
+				//				        .executeUpdate();
+				//				tx.commit();
+				//				session.close();
+				//				tx = session.beginTransaction();
+				//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
+				//						" where nuid = :studentNuid");
+				//				query.setParameter("studentAddress", student.getAddress());
+				//				query.setParameter("studentNuid", nuid);
+				//				
+				//				int result = query.executeUpdate();
+				////				session.save(student);
+				//				tx.commit();
+				//				System.out.println("update = " + result);
+				//				//session.save(student);
+
 			}catch (HibernateException e) {
 				if (tx!=null) tx.rollback();
 				e.printStackTrace(); 
 			}
-			
-			
+
+
 		}else{
 			System.out.println("student id doesn't exists..");
 		}
@@ -162,10 +159,10 @@ public class StudentDao {
 		Transaction tx = null;
 		if(ifNuidExists(nuid)){
 			try{
-				
+
 				Session session = factory.openSession();
 				tx = session.beginTransaction();
-				
+
 				String hql = "UPDATE Student set address = :studentAddress "  + 
 						"WHERE nuid = :studentNuid";
 				org.hibernate.query.Query query = session.createQuery(hql);
@@ -174,35 +171,35 @@ public class StudentDao {
 				int result = query.executeUpdate();
 				System.out.println("Rows affected: " + result);
 				tx.commit();
-//				Session session = factory.openSession();
-//				tx = session.beginTransaction();
-//
-//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
-//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-//				int updatedEntities = session.createQuery( hqlUpdate )
-//				        .setString( "newAddress", student.getAddress())
-//				        .setString( "studentNuid", nuid )
-//				        .executeUpdate();
-//				tx.commit();
-//				session.close();
-//				tx = session.beginTransaction();
-//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
-//						" where nuid = :studentNuid");
-//				query.setParameter("studentAddress", student.getAddress());
-//				query.setParameter("studentNuid", nuid);
-//				
-//				int result = query.executeUpdate();
-////				session.save(student);
-//				tx.commit();
-//				System.out.println("update = " + result);
-//				//session.save(student);
-				
+				//				Session session = factory.openSession();
+				//				tx = session.beginTransaction();
+				//
+				//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
+				//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
+				//				int updatedEntities = session.createQuery( hqlUpdate )
+				//				        .setString( "newAddress", student.getAddress())
+				//				        .setString( "studentNuid", nuid )
+				//				        .executeUpdate();
+				//				tx.commit();
+				//				session.close();
+				//				tx = session.beginTransaction();
+				//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
+				//						" where nuid = :studentNuid");
+				//				query.setParameter("studentAddress", student.getAddress());
+				//				query.setParameter("studentNuid", nuid);
+				//				
+				//				int result = query.executeUpdate();
+				////				session.save(student);
+				//				tx.commit();
+				//				System.out.println("update = " + result);
+				//				//session.save(student);
+
 			}catch (HibernateException e) {
 				if (tx!=null) tx.rollback();
 				e.printStackTrace(); 
 			}
-			
-			
+
+
 		}else{
 			System.out.println("student id doesn't exists..");
 		}
@@ -215,7 +212,7 @@ public class StudentDao {
 		Student student =  (Student) list.get(0);
 		return student.getId();
 	}
-	
+
 	public boolean deleteStudentRecord(String nuid){		
 		Transaction tx = null;
 
@@ -237,14 +234,14 @@ public class StudentDao {
 		} finally {
 			session.close(); 
 		}
-		
+
 		return true;
 	}
 
 	public boolean ifNuidExists(String nuid){
 		try{
 			System.out.println("Checking if an entered nuid exists or not.......");
-			org.hibernate.query.Query query = session.createQuery("from Student where nuid = :studentNuid ");
+			org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid ");
 			query.setParameter("studentNuid", nuid);
 			List list = query.list();
 			System.out.println("list size = " + list.size());
@@ -254,7 +251,7 @@ public class StudentDao {
 		}catch (HibernateException e) {
 			e.printStackTrace(); 
 		}
-		
+
 		return false;
 	}
 }
