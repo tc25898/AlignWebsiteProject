@@ -42,6 +42,7 @@ public class StudentDao {
 		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid");
 		query.setParameter("studentNuid", nuid);
 		List list = query.list();
+		System.out.println("The size is " + list.size()); 
 		if(list.size()==1){
 			return (Student) list.get(0);
 		}else{
@@ -49,6 +50,20 @@ public class StudentDao {
 			return null;
 		}
 	}
+
+//	public Student getStudentRecord(String nuid) {
+////		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid");
+//		org.hibernate.query.Query query = session.createQuery("from Student where Campus = :studentNuid");
+//		query.setParameter("studentNuid", "SILICON_VALLEY");
+//		List list = query.list();
+//		System.out.println("The size is " + list.size()); 
+//		if(list.size()==1){
+//			return (Student) list.get(0);
+//		}else{
+//			System.out.println("The list should contain only one student with a given nuid");
+//			return null;
+//		}
+//	}
 
 	public Student getStudentRecordByEmailId(String email) {
 		org.hibernate.query.Query query = session.createQuery("from Student where Email = :studentEmail");
@@ -97,109 +112,51 @@ public class StudentDao {
 	}
 
 
-
-
-	public void updateStudentRecordDaoByEmail(String email, Student student) {
-		Transaction tx = null;
-		String nuid = getNuidForEmail(email);
-		if(ifNuidExists(nuid)){
-			try{
-
-				Session session = factory.openSession();
-				tx = session.beginTransaction();
-
-				String hql = "UPDATE Student set address = :studentAddress "  + 
-						"WHERE nuid = :studentNuid";
-				org.hibernate.query.Query query = session.createQuery(hql);
-				query.setParameter("studentAddress", "Bellevue Meadows from Ecliplse");
-				query.setParameter("studentNuid", nuid);
-				int result = query.executeUpdate();
-				System.out.println("Rows affected: " + result);
-				tx.commit();
-				//				Session session = factory.openSession();
-				//				tx = session.beginTransaction();
-				//
-				//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
-				//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-				//				int updatedEntities = session.createQuery( hqlUpdate )
-				//				        .setString( "newAddress", student.getAddress())
-				//				        .setString( "studentNuid", nuid )
-				//				        .executeUpdate();
-				//				tx.commit();
-				//				session.close();
-				//				tx = session.beginTransaction();
-				//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
-				//						" where nuid = :studentNuid");
-				//				query.setParameter("studentAddress", student.getAddress());
-				//				query.setParameter("studentNuid", nuid);
-				//				
-				//				int result = query.executeUpdate();
-				////				session.save(student);
-				//				tx.commit();
-				//				System.out.println("update = " + result);
-				//				//session.save(student);
-
-			}catch (HibernateException e) {
-				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
-			}
-
-
-		}else{
-			System.out.println("student id doesn't exists..");
-		}
-	}
+//	public void updateStudentRecordDaoByEmail(String email, Student student) {
+//		Transaction tx = null;
+//		if(ifNuidExists(neuid)){
+//			System.out.println("updating student in addStudentRecord");
+//			try {
+//				tx = session.beginTransaction();
+//				System.out.println("State is ====== " + student.getState());
+//				int studentId = getIdFromNuid(neuid);
+//				student.setId(studentId); 
+//				session.update(student);
+//				tx.commit();
+//			} catch (HibernateException e) {
+//				System.out.println("HibernateException: " + e);
+//				if (tx!=null) tx.rollback();
+//			} finally {
+//				session.close(); 
+//			}
+//		}else{
+//			System.out.println("student id doesn't exists..");
+//		}
+//	}
 
 	private String getNuidForEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void updateStudentRecordDao(String nuid, Student student) {
+	public void updateStudentRecordDao(String neuid, Student student) {
 		Transaction tx = null;
-		if(ifNuidExists(nuid)){
-			try{
-
-				Session session = factory.openSession();
+		if(ifNuidExists(neuid)){
+			System.out.println("updating student in addStudentRecord");
+			try {
 				tx = session.beginTransaction();
-
-				String hql = "UPDATE Student set address = :studentAddress "  + 
-						"WHERE nuid = :studentNuid";
-				org.hibernate.query.Query query = session.createQuery(hql);
-				query.setParameter("studentAddress", "Bellevue Meadows from Ecliplse");
-				query.setParameter("studentNuid", nuid);
-				int result = query.executeUpdate();
-				System.out.println("Rows affected: " + result);
+				System.out.println("State is ====== " + student.getState());
+				int studentId = getIdFromNuid(neuid);
+				student.setId(studentId); 
+				session.clear();
+				session.saveOrUpdate(student);
 				tx.commit();
-				//				Session session = factory.openSession();
-				//				tx = session.beginTransaction();
-				//
-				//				String hqlUpdate = "update Student s set s.address = :newAddress where s.nuid = :studentNuid";
-				//				// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-				//				int updatedEntities = session.createQuery( hqlUpdate )
-				//				        .setString( "newAddress", student.getAddress())
-				//				        .setString( "studentNuid", nuid )
-				//				        .executeUpdate();
-				//				tx.commit();
-				//				session.close();
-				//				tx = session.beginTransaction();
-				//				org.hibernate.query.Query query = session.createQuery("update Student set address = :studentAddress" +
-				//						" where nuid = :studentNuid");
-				//				query.setParameter("studentAddress", student.getAddress());
-				//				query.setParameter("studentNuid", nuid);
-				//				
-				//				int result = query.executeUpdate();
-				////				session.save(student);
-				//				tx.commit();
-				//				System.out.println("update = " + result);
-				//				//session.save(student);
-
-			}catch (HibernateException e) {
+			} catch (HibernateException e) {
+				System.out.println("HibernateException: " + e);
 				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
+			} finally {
+				session.close(); 
 			}
-
-
 		}else{
 			System.out.println("student id doesn't exists..");
 		}

@@ -72,16 +72,16 @@ public class StudentResource {
 		}
 	}
 	
-//	// Template method for updating a student record by nuid
-//	@PUT
-//	@Path("/{nuid}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//    public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
-//		System.out.println("update record nuid=" + nuid);
-//		studentDao.updateStudentRecordDao(nuid, student);
-//    }
-//
+	// Template method for updating a student record by nuid
+	@PUT
+	@Path("/{neuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+    public void updateStudentRecord(@PathParam("neuid") String neuid , Student student) {
+		System.out.println("update record nuid=" + neuid);
+		studentDao.updateStudentRecordDao(neuid, student);
+    }
+
 //	// Template method for updating a student record by email
 //	@PUT
 //    @Consumes(MediaType.APPLICATION_JSON)
@@ -90,16 +90,16 @@ public class StudentResource {
 //		System.out.println("update record nuid=" + emailId);
 //		studentDao.updateStudentRecordDaoByEmail(emailId, student);
 //    }
-//	
-//	// student opt-in/opt-out
-//	@PUT
-//	@Path("/opt-in/{nuid}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//    public void updateStudentOptIn(@PathParam("nuid") String nuid , Student student) {
-//		System.out.println("update opt-in field for nuid=" + nuid);
-//    }	
-//	
+	
+	// student opt-in/opt-out
+	@PUT
+	@Path("/opt-in/{nuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+    public void updateStudentOptIn(@PathParam("nuid") String nuid , Student student) {
+		System.out.println("update opt-in field for nuid=" + nuid);
+    }	
+	
 	@DELETE
 	@Path("{neuid}")
 	@Produces({ MediaType.APPLICATION_JSON})
