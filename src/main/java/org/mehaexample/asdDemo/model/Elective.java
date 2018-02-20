@@ -1,8 +1,8 @@
 package org.mehaexample.asdDemo.model;
 
-public class Experience {
+public class Elective {
 	private int id;
-	private String nueId;
+	private String neuId;
 	private String title;
 	private String description;
 
@@ -14,26 +14,26 @@ public class Experience {
 		this.id = id;
 	}
 
-	public String getNueId() {
-		return nueId;
+	public String getNeuId() {
+		return neuId;
 	}
-	
-	public void setNueId(String nueId) {
-		this.nueId = nueId;
+
+	public void setNeuId(String neuId) {
+		this.neuId = neuId;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}

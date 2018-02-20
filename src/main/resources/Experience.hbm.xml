@@ -10,11 +10,11 @@
          This class contains the Student's Experience details. 
       </meta>
       
-      <id name = "id" type = "int" column = "id">
+      <id name = "id" type = "int" column = "ExperienceId">
          <generator class="native"/>
       </id>
       
-      <property name = "nuid" column = "nuid" type = "string"/>    
+      <property name = "nueId" column = "NeuId" type = "string"/>    
       <property name = "title" column = "title" type = "string"/>
       <property name = "description" column = "description" type = "string"/>
       

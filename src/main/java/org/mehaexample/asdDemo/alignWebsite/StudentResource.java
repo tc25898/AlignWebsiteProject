@@ -17,17 +17,16 @@ import javax.ws.rs.core.MediaType;
 import org.mehaexample.asdDemo.dao.StudentDao;
 import org.mehaexample.asdDemo.model.Student;
 
-import utils.StudentDaoJdbc;
 
 @Path("studentresource")
 public class StudentResource {
-	StudentDao studentDaoHibernate = new StudentDao();
+	StudentDao studentDao = new StudentDao();
 	
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent
-	 * to the client as "text/plain" media type.
+	 * to the client as "APPLICATION_JSON" media type.
 	 *
-	 * @return String that will be returned as a text/plain response.
+	 * @return String that will be returned as a APPLICATION_JSON response.
 	 */
 	
 	@GET
@@ -35,39 +34,38 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudents() {
 		System.out.println("Getting all students");
-		ArrayList<Student> list = (ArrayList<Student>) studentDaoHibernate.getAllStudents();
-		
+		ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
 		return list;
 	}
 	
-	// Template method for fetching a student record by nuid
 	// http://localhost:8080/alignWebsite/webapi/studentresource?emailId=ashley.fields@husky.neu.edu
 	@GET
+	@Path("email/{emailId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
+	public Student getStudentRecordByEmailId(@PathParam("emailId") String emailId){
 		System.out.println("get by email : " + emailId);
-		return new Student(); 
+		Student studentRecord = studentDao.getStudentRecordByEmailId(emailId);
+		return studentRecord; 
 	}
 
-	// Template method for fetching a student record by email
-	// http://localhost:8080/alignWebsite/webapi/studentresource/123
+	// http://localhost:8080/alignWebsite/webapi/studentresource/111234544
 	@GET
-	@Path("{nuid}")
+	@Path("id/{nuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
+		Student studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void saveStudentForm(Student student){
-		System.out.println("saving student " + student.getFirstName() + ", " + student.getNuid());
-		boolean exists = studentDaoHibernate.ifNuidExists(student.getNuid());
+		System.out.println("saving student-- " + student.getFirstName() + ", " + student.getState());
+		boolean exists = studentDao.ifNuidExists(student.getNeuId());
 		System.out.println("student exists = " + exists);
 		if(exists == false){			
-			studentDaoHibernate.addStudentRecord(student);	
+			studentDao.addStudentRecord(student);	
 		}else{
 			System.out.println("The entered NUID exists already");
 		}
@@ -75,22 +73,22 @@ public class StudentResource {
 	
 	// Template method for updating a student record by nuid
 	@PUT
-	@Path("/{nuid}")
+	@Path("update/{neuid}")
     @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-    public void updateStudentRecord(@PathParam("nuid") String nuid , Student student) {
-		System.out.println("update record nuid=" + nuid);
-		studentDaoHibernate.updateStudentRecordDao(nuid, student);
+    public void updateStudentRecord(@PathParam("neuid") String neuid , Student student) {
+		System.out.println("update record nuid=" + neuid);
+		studentDao.updateStudentRecordDao(neuid, student);
     }
 
-	// Template method for updating a student record by email
-	@PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public void updateStudentRecordByEmail(@QueryParam("emailId") String emailId , Student student) {
-		System.out.println("update record nuid=" + emailId);
-		studentDaoHibernate.updateStudentRecordDaoByEmail(emailId, student);
-    }
+//	// Template method for updating a student record by email
+//	@PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//    public void updateStudentRecordByEmail(@QueryParam("emailId") String emailId , Student student) {
+//		System.out.println("update record nuid=" + emailId);
+//		studentDao.updateStudentRecordDaoByEmail(emailId, student);
+//    }
 	
 	// student opt-in/opt-out
 	@PUT
@@ -102,18 +100,18 @@ public class StudentResource {
     }	
 	
 	@DELETE
-	@Path("{nuid}")
+	@Path("delete/{neuid}")
 	@Produces({ MediaType.APPLICATION_JSON})
-	public void deleteStudentByNUID(@PathParam("nuid") String nuid)
+	public void deleteStudentByNUID(@PathParam("neuid") String neuid)
 	{      
 		System.out.println("delete called ");
 		Student student = new Student();
 
-		System.out.println("nuid to be deleted is: " + nuid);
-		boolean exists = studentDaoHibernate.ifNuidExists(nuid);
+		System.out.println("nuid to be deleted is: " + neuid);
+		boolean exists = studentDao.ifNuidExists(neuid);
 		System.out.println("exists = " + exists);
 		if(exists == true){
-			studentDaoHibernate.deleteStudentRecord(nuid);
+			studentDao.deleteStudentRecord(neuid);
 		}else{
 			System.out.println("This nuid doesn't exist");
 		}

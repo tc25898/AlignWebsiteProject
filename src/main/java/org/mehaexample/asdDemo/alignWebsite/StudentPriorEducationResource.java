@@ -27,7 +27,7 @@ public class StudentPriorEducationResource {
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<PriorEducation> getAllExperiences() {
-		ArrayList<PriorEducation> list = studentPriorEducationDao.getAllPriorEducations();
+		List<PriorEducation> list = studentPriorEducationDao.getAllPriorEducations();
 		return list;
 	}
 
@@ -46,7 +46,7 @@ public class StudentPriorEducationResource {
 	@Path("{nuid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void savePriorEducationForm(@PathParam("nuid") String nuid, PriorEducation priorEducation){
-		System.out.println("save priror edu " + priorEducation.getInstitutionName());
+		System.out.println("save priror edu " + priorEducation.getInstitutionId());
 		studentPriorEducationDao.addPriorEducation(nuid, priorEducation); 
 	} 
 	
