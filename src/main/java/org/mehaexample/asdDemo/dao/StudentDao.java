@@ -206,7 +206,7 @@ public class StudentDao {
 	}
 
 	public int getIdFromNuid(String nuid){
-		org.hibernate.query.Query query = session.createQuery("from Student where nuid = :studentNuid");
+		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid");
 		query.setParameter("studentNuid", nuid);
 		List list = query.list();
 		Student student =  (Student) list.get(0);
@@ -219,7 +219,7 @@ public class StudentDao {
 		try {
 			tx = session.beginTransaction();
 			Student student = session.get(Student.class, getIdFromNuid(nuid)); 
-			System.out.println("Deleting student for nuid = " + nuid);
+			System.out.println("Deleting student for NeuId = " + nuid);
 			session.delete(student); 
 			tx.commit();
 			if(ifNuidExists(nuid)){

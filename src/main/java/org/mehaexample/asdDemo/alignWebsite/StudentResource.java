@@ -101,18 +101,18 @@ public class StudentResource {
 //    }	
 //	
 	@DELETE
-	@Path("{nuid}")
+	@Path("{neuid}")
 	@Produces({ MediaType.APPLICATION_JSON})
-	public void deleteStudentByNUID(@PathParam("nuid") String nuid)
+	public void deleteStudentByNUID(@PathParam("neuid") String neuid)
 	{      
 		System.out.println("delete called ");
 		Student student = new Student();
 
-		System.out.println("nuid to be deleted is: " + nuid);
-		boolean exists = studentDao.ifNuidExists(nuid);
+		System.out.println("nuid to be deleted is: " + neuid);
+		boolean exists = studentDao.ifNuidExists(neuid);
 		System.out.println("exists = " + exists);
 		if(exists == true){
-			studentDao.deleteStudentRecord(nuid);
+			studentDao.deleteStudentRecord(neuid);
 		}else{
 			System.out.println("This nuid doesn't exist");
 		}
