@@ -32,6 +32,36 @@ public class StudentDao {
 		}
 	}
 
+	public List<Student> getAllStudents(){
+		org.hibernate.query.Query query = session.createQuery("from Student");
+		List<Student> list = query.list();
+		return list;
+	}
+	
+	public Student getStudentRecord(String nuid) {
+		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid");
+		query.setParameter("studentNuid", nuid);
+		List list = query.list();
+		if(list.size()==1){
+			return (Student) list.get(0);
+		}else{
+			System.out.println("The list should contain only one student with a given nuid");
+			return null;
+		}
+	}
+	
+	public Student getStudentRecordByEmailId(String email) {
+		org.hibernate.query.Query query = session.createQuery("from Student where Email = :studentEmail");
+		query.setParameter("studentEmail", email);
+		List list = query.list();
+		if(list.size()==1){
+			return (Student) list.get(0);
+		}else{
+			System.out.println("The list should contain only one student with a given email or the student doesn't exists ");
+			return null;
+		}
+	}
+
 	public void addStudentRecord(Student student) {		
 		Transaction tx = null;
 
@@ -69,23 +99,8 @@ public class StudentDao {
 		return list;
 	}
 
-	public List<Student> getAllStudents(){
-		org.hibernate.query.Query query = session.createQuery("from Student");
-		List<Student> list = query.list();
-		return list;
-	}
+	
 
-	public Student getStudentRecord(String nuid) {
-		org.hibernate.query.Query query = session.createQuery("from Student where NeuId = :studentNuid ");
-		query.setParameter("studentNuid", nuid);
-		List list = query.list();
-		if(list.size()==1){
-			return (Student) list.get(0);
-		}else{
-			System.out.println("The list should contain only one student with a given nuid");
-			return null;
-		}
-	}
 	
 	public void updateStudentRecordDaoByEmail(String email, Student student) {
 		Transaction tx = null;

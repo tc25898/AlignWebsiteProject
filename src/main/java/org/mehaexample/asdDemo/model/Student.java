@@ -8,7 +8,6 @@ import org.mehaexample.asdDemo.enums.EnrollmentStatus;
 import org.mehaexample.asdDemo.enums.Gender;
 
 @XmlRootElement
-
 public class Student {
 	private int id;
 	private String neuId;
@@ -24,7 +23,7 @@ public class Student {
 	private String address;
 	private String State;
 	private String zip;
-	private EnrollmentStatus enrollmentStatus; 
+	private EnrollmentStatus enrollmentStatus;
 	private Campus campus;
 	private DegreeCandidacy degreeCandidacy;
 	private String photo;
@@ -77,16 +76,16 @@ public class Student {
 		this.lastName = lastName;
 	}
 
+	public boolean isScholarship() {
+		return scholarship;
+	}
+
 	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
-		this.gender = Gender.valueOf(gender);
-	}
-
-	public boolean isScholarship() {
-		return scholarship;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public void setScholarship(boolean scholarship) {
@@ -143,26 +142,26 @@ public class Student {
 
 	public EnrollmentStatus getEnrollmentStatus() {
 		return enrollmentStatus;
-	}
+	} 
 
-	public void setEnrollmentStatus(String enrollmentStatus) {
-		this.enrollmentStatus = EnrollmentStatus.valueOf(enrollmentStatus);
+	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
+		this.enrollmentStatus = enrollmentStatus;
 	}
 
 	public Campus getCampus() {
 		return campus;
 	}
 
-	public void setCampus(String campus) {
-		this.campus = Campus.valueOf(campus);
+	public void setCampus(Campus campus) {
+		this.campus = campus;
 	}
 
 	public DegreeCandidacy getDegreeCandidacy() {
 		return degreeCandidacy;
 	}
 
-	public void setDegreeCandidacy(String degreeCandidacy) {
-		this.degreeCandidacy = DegreeCandidacy.valueOf(degreeCandidacy);
+	public void setDegreeCandidacy(DegreeCandidacy degreeCandidacy) {
+		this.degreeCandidacy = degreeCandidacy;
 	}
 
 	public String getPhoto() {

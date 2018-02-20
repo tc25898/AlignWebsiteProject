@@ -40,17 +40,16 @@ public class StudentResource {
 		return list;
 	}
 	
-	// Template method for fetching a student record by nuid
 	// http://localhost:8080/alignWebsite/webapi/studentresource?emailId=ashley.fields@husky.neu.edu
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
 		System.out.println("get by email : " + emailId);
-		return new Student(); 
+		Student studentRecord = studentDao.getStudentRecordByEmailId(emailId);
+		return studentRecord; 
 	}
 
-	// Template method for fetching a student record by email
-	// http://localhost:8080/alignWebsite/webapi/studentresource/123
+	// http://localhost:8080/alignWebsite/webapi/studentresource/111234544
 	@GET
 	@Path("{nuid}")
 	@Produces(MediaType.APPLICATION_JSON)
