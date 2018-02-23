@@ -33,6 +33,7 @@ public class StudentDao {
 	}
 
 	public List<Student> getAllStudents(){
+		System.out.println("reached dao");
 		org.hibernate.query.Query query = session.createQuery("from Student");
 		List<Student> list = query.list();
 		return list;

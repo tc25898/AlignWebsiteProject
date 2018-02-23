@@ -1,5 +1,8 @@
 package org.mehaexample.asdDemo.model;
 
+
+
+import java.sql.Blob;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.mehaexample.asdDemo.enums.Campus;
@@ -171,4 +174,6 @@ public class Student {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
+
 }

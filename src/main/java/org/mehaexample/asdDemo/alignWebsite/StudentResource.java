@@ -17,8 +17,6 @@ import javax.ws.rs.core.MediaType;
 import org.mehaexample.asdDemo.dao.StudentDao;
 import org.mehaexample.asdDemo.model.Student;
 
-import utils.StudentDaoJdbc;
-
 @Path("studentresource")
 public class StudentResource {
 	StudentDao studentDao = new StudentDao();

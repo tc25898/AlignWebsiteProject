@@ -2,6 +2,7 @@ package org.mehaexample.asdDemo.model;
 
 public class Elective {
 	private int id;
+	// make neuId from string to student 
 	private String neuId;
 	private String title;
 	private String description;
