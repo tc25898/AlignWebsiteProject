@@ -18,14 +18,14 @@ import org.mehaexample.asdDemo.model.Student;
 public class PublicFacing {
 
 	// student end points
-	StudentDao studentDaoHibernate = new StudentDao();
+	StudentDao studentDao = new StudentDao();
 	
 	@GET
 	@Path("search/{degree}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> searchSimilarStudents(@PathParam("degree") String degree){
 		System.out.println("getting search results for degree = " + degree);
-		ArrayList<Student> studentRecords = (ArrayList<Student>) studentDaoHibernate.searchSimilarStudents(degree);
+		ArrayList<Student> studentRecords = (ArrayList<Student>) studentDao.searchSimilarStudents(degree);
 		return studentRecords; 
 	}
 	
@@ -34,7 +34,7 @@ public class PublicFacing {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentProfile(@PathParam("nuid") String nuid){
 		System.out.println("getting student profile for nuid = " + nuid);
-		Student studentRecord = studentDaoHibernate.getStudentRecord(nuid);
+		Student studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord; 
 	}
 	
