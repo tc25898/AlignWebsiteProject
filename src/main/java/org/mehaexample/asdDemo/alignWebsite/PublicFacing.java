@@ -9,14 +9,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentDaoHibernate;
+import org.mehaexample.asdDemo.dao.StudentDao;
 import org.mehaexample.asdDemo.model.Student;
 
 @Path("public")
 public class PublicFacing {
 
 	// student end points
-	StudentDaoHibernate studentDaoHibernate = new StudentDaoHibernate();
+	StudentDao studentDaoHibernate = new StudentDao();
 	
 	@GET
 	@Path("search/{degree}/{major}")
