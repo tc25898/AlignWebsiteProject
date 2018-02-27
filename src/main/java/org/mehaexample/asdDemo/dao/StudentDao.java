@@ -1,5 +1,5 @@
 package org.mehaexample.asdDemo.dao;
-
+/*
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -213,3 +213,4 @@ public class StudentDao {
 		return false;
 	}
 }
+*/

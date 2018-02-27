@@ -14,12 +14,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.mehaexample.asdDemo.dao.StudentDao;
-import org.mehaexample.asdDemo.model.Student;
+import org.junit.Test;
+import org.mehaexample.asdDemo.dao.StudentsDao;
+import org.mehaexample.asdDemo.enums.Campus;
+import org.mehaexample.asdDemo.enums.DegreeCandidacy;
+import org.mehaexample.asdDemo.enums.EnrollmentStatus;
+import org.mehaexample.asdDemo.enums.Gender;
+import org.mehaexample.asdDemo.model.Students;
 
 @Path("studentresource")
 public class StudentResource {
-	StudentDao studentDao = new StudentDao();
+	StudentsDao studentDao = new StudentsDao();
 	
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent
@@ -31,54 +36,66 @@ public class StudentResource {
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Student> getAllStudents() {
-		System.out.println("Getting all students");
-		ArrayList<Student> list = (ArrayList<Student>) studentDao.getAllStudents();
+	public List<Students> getAllStudents() {
+		List<Students> list = studentDao.getAllStudents();
 		
 		return list;
 	}
 	
-	// http://localhost:8080/alignWebsite/webapi/studentresource?emailId=ashley.fields@husky.neu.edu
 	@GET
+	@Path("/allho")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
-		System.out.println("get by email : " + emailId);
-		Student studentRecord = studentDao.getStudentRecordByEmailId(emailId);
-		return studentRecord; 
+	public List<String> getAllStudents2() {
+		System.out.println("Getting all students");
+		
+		List<String> list = new ArrayList<>();
+		list.add("ho");
+		
+		System.out.println("yo");
+		return list;
 	}
+	
+//	// http://localhost:8080/alignWebsite/webapi/studentresource?emailId=ashley.fields@husky.neu.edu
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Students getStudentRecordByEmailId(@QueryParam("emailId") String emailId){
+//		System.out.println("get by email : " + emailId);
+//		Students studentRecord = studentDao.getStudentRecordByEmailId(emailId);
+//		return studentRecord; 
+//	}
 
 	// http://localhost:8080/alignWebsite/webapi/studentresource/111234544
 	@GET
 	@Path("{nuid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student getStudentRecord(@PathParam("nuid") String nuid){
+	public Students getStudentRecord(@PathParam("nuid") String nuid){
 		System.out.println("getting student for nuid = " + nuid);
-		Student studentRecord = studentDao.getStudentRecord(nuid);
+		Students studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void saveStudentForm(Student student){
+	public void saveStudentForm(Students student){
 		System.out.println("saving student-- " + student.getFirstName() + ", " + student.getState());
 		boolean exists = studentDao.ifNuidExists(student.getNeuId());
 		System.out.println("student exists = " + exists);
 		if(exists == false){			
-			studentDao.addStudentRecord(student);	
+			studentDao.addStudent(student);	
 		}else{
 			System.out.println("The entered NUID exists already");
 		}
 	}
 	
-	// Template method for updating a student record by nuid
-	@PUT
-	@Path("/{neuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public void updateStudentRecord(@PathParam("neuid") String neuid , Student student) {
-		System.out.println("update record nuid=" + neuid);
-		studentDao.updateStudentRecordDao(neuid, student);
-    }
+//	// Template method for updating a student record by nuid
+//	@PUT
+//	@Path("/{neuid}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//    public void updateStudentRecord(@PathParam("neuid") String neuid , Students student) {
+//		System.out.println("update record nuid=" + neuid);
+//		studentDao.updateStudentRecordDao(neuid, student);
+//    }
 
 //	// Template method for updating a student record by email
 //	@PUT
@@ -89,28 +106,28 @@ public class StudentResource {
 //		studentDao.updateStudentRecordDaoByEmail(emailId, student);
 //    }
 	
-	// student opt-in/opt-out
-	@PUT
-	@Path("/opt-in/{nuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public void updateStudentOptIn(@PathParam("nuid") String nuid , Student student) {
-		System.out.println("update opt-in field for nuid=" + nuid);
-    }	
-	
+//	// student opt-in/opt-out
+//	@PUT
+//	@Path("/opt-in/{nuid}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//    public void updateStudentOptIn(@PathParam("nuid") String nuid , Student student) {
+//		System.out.println("update opt-in field for nuid=" + nuid);
+//    }	
+//	
 	@DELETE
 	@Path("{neuid}")
 	@Produces({ MediaType.APPLICATION_JSON})
 	public void deleteStudentByNUID(@PathParam("neuid") String neuid)
 	{      
 		System.out.println("delete called ");
-		Student student = new Student();
+		Students student = new Students();
 
 		System.out.println("nuid to be deleted is: " + neuid);
 		boolean exists = studentDao.ifNuidExists(neuid);
 		System.out.println("exists = " + exists);
 		if(exists == true){
-			studentDao.deleteStudentRecord(neuid);
+			studentDao.deleteStudent(neuid);
 		}else{
 			System.out.println("This nuid doesn't exist");
 		}

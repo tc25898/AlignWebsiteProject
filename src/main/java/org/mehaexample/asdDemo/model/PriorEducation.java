@@ -2,8 +2,11 @@ package org.mehaexample.asdDemo.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.mehaexample.asdDemo.enums.DegreeCandidacy;
 
+@XmlRootElement
 public class PriorEducation {
 	private int id;
 	private String neuId;

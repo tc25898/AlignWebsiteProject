@@ -27,7 +27,7 @@
       </property>
       
       <!-- List of XML mapping files -->
-      <mapping resource = "Student.hbm.xml"/>
+      <mapping resource = "Students.hbm.xml"/>
       <mapping resource = "PriorEducation.hbm.xml"/>
       <mapping resource = "Experience.hbm.xml"/>
       <mapping resource = "Elective.hbm.xml"/>

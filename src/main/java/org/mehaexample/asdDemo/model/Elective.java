@@ -1,5 +1,8 @@
 package org.mehaexample.asdDemo.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Elective {
 	private int id;
 	// make neuId from string to student 

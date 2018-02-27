@@ -1,5 +1,5 @@
 package org.mehaexample.asdDemo.dao;
-
+/*
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,3 +82,4 @@ public class PriorEducationDao {
 	}
 
 }
+*/

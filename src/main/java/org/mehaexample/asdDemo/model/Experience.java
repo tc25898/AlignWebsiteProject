@@ -1,5 +1,8 @@
 package org.mehaexample.asdDemo.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Experience {
 	private int id;
 	private String nueId;
