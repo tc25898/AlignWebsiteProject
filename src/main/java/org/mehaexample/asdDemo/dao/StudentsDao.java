@@ -61,7 +61,7 @@ public class StudentsDao {
     }
 
     /**
-     * Search a single student record using neu id.
+     * Get a single student record using neuId
      *
      * @param neuId
      * @return a student object
@@ -79,6 +79,24 @@ public class StudentsDao {
     }
 
     /**
+     * Get a single student record using emailId
+     * 
+     * @param emailId
+     * @return a student object
+     */
+    public Students getStudentRecordByEmailId(String emailId) {
+    	 org.hibernate.query.Query query = session.createQuery("FROM Students WHERE Email = :studentEmailId ");
+         query.setParameter("studentEmailId", emailId);
+         List list = query.list();
+         if(list.size()==1){
+             return (Students) list.get(0);
+         }else{
+             System.out.println("The list should contain only one student with a given nuid");
+             return null;
+         }		 
+	}
+    
+    /**
      * Update a student record.
      *
      * @param student which contains the latest information.
@@ -91,21 +109,22 @@ public class StudentsDao {
             try{
                 Session session = factory.openSession();
                 tx = session.beginTransaction();
-                String address = student.getAddress();
-                String email = student.getEmail();
-                String phone = student.getPhoneNum();
-
-                String hql = "UPDATE Students set Address = :address, "  +
-                        "Email = :email, " +
-                        "Phone = :phone " +
-                        "WHERE NeuId = :neuId";
-                org.hibernate.query.Query query = session.createQuery(hql);
-                query.setParameter("address", address);
-                query.setParameter("email", email);
-                query.setParameter("phone", phone);
-                query.setParameter("neuId", neuId);
-                int result = query.executeUpdate();
-                System.out.println("Rows affected: " + result);
+                session.saveOrUpdate(student);
+//                String address = student.getAddress();
+//                String email = student.getEmail();
+//                String phone = student.getPhoneNum();
+//
+//                String hql = "UPDATE Students set Address = :address, "  +
+//                        "Email = :email, " +
+//                        "Phone = :phone " +
+//                        "WHERE NeuId = :neuId";
+//                org.hibernate.query.Query query = session.createQuery(hql);
+//                query.setParameter("address", address);
+//                query.setParameter("email", email);
+//                query.setParameter("phone", phone);
+//                query.setParameter("neuId", neuId);
+//                int result = query.executeUpdate();
+//                System.out.println("Rows affected: " + result);
                 tx.commit();
                 return student;
             }catch (HibernateException e) {
@@ -118,7 +137,7 @@ public class StudentsDao {
 
         return null;
     }
-
+    
     /**
      * Delete a student record from database.
      *
@@ -235,5 +254,7 @@ public class StudentsDao {
         List<Students> list = query.list();
         return list;
     }
+
+	
 }
 
