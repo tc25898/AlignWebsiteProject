@@ -57,6 +57,16 @@ public class StudentResource {
 		Students studentRecord = studentDao.getStudentRecord(nuid);
 		return studentRecord;
 	}
+	
+	
+	@GET
+	@Path("/privacies/id/{nuid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Students getStudentRecordPrivately(@PathParam("nuid") String nuid){
+		System.out.println("getting student for nuid = " + nuid);
+		Students studentRecord = studentDao.getStudentRecordPrivately(nuid);
+		return studentRecord;
+	}
 
 	/**
 	 * Fetch the student details by email id

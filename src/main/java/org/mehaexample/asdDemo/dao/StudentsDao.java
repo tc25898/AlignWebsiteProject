@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.mehaexample.asdDemo.enums.DegreeCandidacy;
+import org.mehaexample.asdDemo.model.Privacies;
 import org.mehaexample.asdDemo.model.Students;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ import org.hibernate.SessionFactory;
 public class StudentsDao {
     private static SessionFactory factory;
     private static Session session;
+    private static PrivaciesDao privaciesDao;
 
     /**
      * Default Constructor.
@@ -26,6 +28,7 @@ public class StudentsDao {
             // next it goes to all table files in the hibernate file and loads them
             factory = new Configuration().configure().buildSessionFactory();
             session = factory.openSession();
+            privaciesDao = new PrivaciesDao();
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
@@ -72,6 +75,61 @@ public class StudentsDao {
         List list = query.list();
         if(list.size()==1){
             return (Students) list.get(0);
+        }else{
+            System.out.println("The list should contain only one student with a given nuid");
+            return null;
+        }
+    }
+    
+    /**
+     * Get a single student record using neuId that respects privacy rules
+     *
+     * @param neuId
+     * @return a student object
+     * http://localhost:8080/alignWebsite/webapi/studentresource/privacies/id/1234567
+     */
+    public Students getStudentRecordPrivately(String neuId) {
+        org.hibernate.query.Query query = session.createQuery("FROM Students WHERE NeuId = :studentNuid ");
+        query.setParameter("studentNuid", neuId);
+        List list = query.list();
+        if(list.size()==1){
+        	Students studentsWithAllDetails = (Students) list.get(0);
+        	Privacies privacies = privaciesDao.getPrivacyRecordByNeuId(studentsWithAllDetails.getNeuId());
+        	System.out.println("phone: "+privacies.isPhoneShown());
+        	Students student = new Students();
+        	if(privacies.isAddressShown()) {
+        		student.setAddress(studentsWithAllDetails.getAddress());
+        	}
+        	
+        	if(privacies.isEmailShown()) {
+        		student.setEmail(studentsWithAllDetails.getEmail());
+        	}
+        	
+        	if(privacies.isEnrollmentStatusShown()) {
+        		student.setEnrollmentStatus(studentsWithAllDetails.getEnrollmentStatus());
+        	}
+        	
+        	if(privacies.isNeuIdShown()) {
+        		student.setNeuId(studentsWithAllDetails.getNeuId());
+        	}
+        	
+        	if(privacies.isPhoneShown()) {
+        		student.setPhoneNum(studentsWithAllDetails.getPhoneNum());
+        	}
+        	
+        	if(privacies.isScholarshipShown()) {
+        		student.setScholarship(studentsWithAllDetails.isScholarship());
+        	}
+        	
+        	if(privacies.isStateShown()) {
+        		student.setState(studentsWithAllDetails.getState());
+        	}
+        	
+        	if(privacies.isZipShown()) {
+        		student.setZip(studentsWithAllDetails.getZip());
+        	}
+        	
+            return (Students) student;
         }else{
             System.out.println("The list should contain only one student with a given nuid");
             return null;
