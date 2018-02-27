@@ -254,7 +254,6 @@ public class StudentsDao {
         List<Students> list = query.list();
         return list;
     }
-
 	
 }
 
